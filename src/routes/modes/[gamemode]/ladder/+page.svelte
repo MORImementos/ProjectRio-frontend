@@ -39,8 +39,8 @@
 
   
   <h1>{$page.params.gamemode}</h1>
-  <section>
-    <table use:sortableTableAction>
+  <section class="table-container">
+    <table class="table" use:sortableTableAction>
       <thead>
       <tr>
         <th>#</th>

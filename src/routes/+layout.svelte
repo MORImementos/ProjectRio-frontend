@@ -6,6 +6,12 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-</script>
 
-<slot />
+	import { AppShell } from '@skeletonlabs/skeleton';
+</script>
+<div class="h-full overflow-hidden contents">
+<AppShell class="w-full h-full flex flex-col overflow-hidden">
+	<slot />
+
+</AppShell>
+</div>

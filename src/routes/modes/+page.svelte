@@ -44,9 +44,10 @@
   <!-- <h1 style="display:flex;justify-content:center;align-items:center;">  <img src={slice} alt=""></h1> -->
 </div>
 {#if data.live}
-  <div class="table-container flex-col flex">
+<div class="flex justify-center items-center mx-auto transition-[width] duration-200 w-full ">
+  <div class="table-container text-token">
     <h2 style="h2">Live Games</h2>
-    <table class="table" use:sortableTableAction>
+    <table class="table table-hover" use:sortableTableAction>
       <thead>
         <tr>
           <th>Away Player</th>
@@ -65,12 +66,12 @@
           {#if withinLastHour(live.start_time)}
             <tr>
               <td class="player-link">
-                <a class="player" href={`/slice/player/${live.away_player}`}>{live.away_player}</a>
+                <a class="player" href={`/modes/player/${live.away_player}`}>{live.away_player}</a>
               </td>
               <td>{live.away_score}</td>
               <td>{live.home_score}</td>
               <td class="player-link">
-                <a class="player" href={`/slice/player/${live.home_player}`}>{live.home_player}</a>
+                <a class="player" href={`/modes/player/${live.home_player}`}>{live.home_player}</a>
               </td>
               <!-- convert stadium id num to string -->
               <td>{stadiums[live.stadium_id]}</td>
@@ -82,7 +83,7 @@
               {/if}
 
               <!-- convert tag id num to string -->
-              <td class="game-mode"><a href={`/slice/${tagsetsData.find(tagset => tagset.id === live.tag_set)?.name}`}/ladder>{tagsetsData.find(tagset => tagset.id === live.tag_set)?.name || ''}</a></td>
+              <td class="game-mode"><a href={`/modes/${tagsetsData.find(tagset => tagset.id === live.tag_set)?.name}`}/ladder>{tagsetsData.find(tagset => tagset.id === live.tag_set)?.name || ''}</a></td>
 
             </tr>
             <tr>
@@ -160,4 +161,5 @@
       </tbody>
     </table>
     </div>
+  </div>
 {/if}
