@@ -1,0 +1,16 @@
+<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+
+<div class="container h-full mx-auto flex justify-center items-center">
+	<div class="space-y-5">
+		<h1 class="h1">Project Rio</h1>
+		<ul class="list-nav flex">
+			<li><button class="btn variant-filled-primary m-2"><a href="/login">login</a></button></li>
+			<li><button class="btn variant-filled-primary m-2"><a href="/login">logout</a></button></li>
+			<li><button class="btn variant-filled-primary m-2"><a href="/community">community</a></button></li>
+			<li><button class="btn variant-filled-primary m-2"><a href="/stats">stats</a></button></li>
+			<li><button class="btn variant-filled-primary m-2"><a href="/modes">modes</a></button></li>
+
+
+		</ul>
+	</div>
+</div>
