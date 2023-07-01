@@ -4,8 +4,7 @@
 </script>
 
 <form 
-    use:enhance
-    action="/logout"    
+    use:enhance   
     method="POST">
 <button>
 LOGOUT

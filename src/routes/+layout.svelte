@@ -11,6 +11,8 @@
 </script>
 <div class="h-full overflow-hidden contents">
 <AppShell class="w-full h-full flex flex-col overflow-hidden">
+
+	
 	<slot />
 
 </AppShell>

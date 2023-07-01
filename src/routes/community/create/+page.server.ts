@@ -1,9 +1,9 @@
-import { z } from 'zod'
-import { superValidate } from 'sveltekit-superforms/server'
-import { Community } from '../../../lib/zodSchema'
+import { z } from 'zod';
+import { superValidate } from 'sveltekit-superforms/server';
+import { Community } from '$lib/zodSchema';
 import { fail, redirect } from '@sveltejs/kit';
-import { BACKEND, COMMUNITY_ENDPOINTS, POST } from '../../../lib/constants';
-import type { Actions } from './$types'
+import { BACKEND, COMMUNITY_ENDPOINTS } from '$lib/constants';
+import type { Actions } from './$types';
 
 // assign schema for form
 const communityCreate = Community.pick({
@@ -54,12 +54,12 @@ export const actions = {
             {
                 // this is all just a way to parse the html error received. I'm still not certain if I intend to do anything with it or not yet, since a generic error might be all that's needed.
                 const reader = response.body?.getReader()
-                let reading = true;
-                let errorObj = {}
+                const reading = true;
+                const errorObj = {}
                 while (reading) {
                     const { done, value } = await reader?.read()
                     if (done) break
-                    let val = new TextDecoder().decode(value)
+                    const val = new TextDecoder().decode(value)
                     errorObj[val] = val
                 }
                 // return error

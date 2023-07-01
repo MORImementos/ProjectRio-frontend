@@ -15,7 +15,7 @@
   {/if}
   <SuperDebug data={$form} />
   
-  <form method="POST" use:enhance>
+  <form method="POST" class="form flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 w-[90%] h-full shadow-2xl" use:enhance>
     <label for="community_name">community name</label>
     <input
     type="text"
