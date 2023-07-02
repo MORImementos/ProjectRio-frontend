@@ -43,6 +43,44 @@ export const Community = z.object({
             z.literal('on').transform(() => true),
             z.literal('undefined').transform(() => false),
         ])
+        .default(false)
+        .optional(),
+    global_link: z
+        .union([
+            z.literal('on').transform(() => true),
+            z.literal('undefined').transform(() => false),
+        ])
+        .default(false)
+        .optional(),
+    desc: z
+        .string({ required_error: 'Enter a valid description' })
+        .max(1000, { message: 'Community description is too long' })
+        .min(1, { message: 'Community description is too short'})
+        .trim(),
+})
+
+// name as gamemodes insted?
+
+export const Tagset = z.object({
+    name: z
+        .string({ required_error: 'Enter a valid name' })
+        .max(100, { message: 'Name is too long'})
+        .min(1, { message: 'Name is too short'})
+        .trim(),
+    desc: z
+        .string({ required_error: 'Enter a valid description' })
+        .max(1000, { message: 'Community description is too long' })
+        .min(1, { message: 'Community description is too short'})
+        .trim(),
+    type: z
+        .enum(["Official", "Unofficial"], { required_error: 'Enter a valid type' }),
+    tags: z
+        .array(z.number()),
+    private: z
+        .union([
+            z.literal('on').transform(() => true),
+            z.literal('undefined').transform(() => false),
+        ])
         .default(false),
     global_link: z
         .union([
@@ -50,9 +88,5 @@ export const Community = z.object({
             z.literal('undefined').transform(() => false),
         ])
         .default(false),
-    desc: z
-        .string({ required_error: 'Enter a valid description' })
-        .max(1000, { message: 'Community description is too long' })
-        .min(1, { message: 'Community description is too short'})
-        .trim(),
+
 })

@@ -3,10 +3,10 @@
 
 </script>
 
-<form 
+<!-- <form 
     use:enhance   
     method="POST">
 <button>
 LOGOUT
 </button>
-</form>
+</form> -->

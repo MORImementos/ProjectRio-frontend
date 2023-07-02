@@ -53,7 +53,8 @@ export enum POPULATE_DB_ENDPOINTS {
 
 export enum UNCATEGORIZED_ENDPOINTS {
     RECREATE_STAT_FILE = '/recreate_stat_file/',
-    GET_TAG_SET = '/tag_set/ladder/'
+    GET_TAG_SET = '/tag_set/ladder/',
+    TAG_LIST = '/tag/list/'
 }
 
 export const GET = async (endpoint: string, param='') => {
@@ -74,3 +75,10 @@ export const EMAIL_CHARACTER_LIMIT = 120;
 // COMMUNITY
 export const COMMUNITY_CHARACTER_LIMIT = 100;
 export const COMMUNITY_DESCRIPTION_CHARACTER_LIMIT = 1000;
+
+export const COMMUNITY_TYPES = [
+    'Official',
+    'Unofficial',
+]
+
+export const 
