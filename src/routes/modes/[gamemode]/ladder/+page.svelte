@@ -35,7 +35,7 @@
   
   </script>
 
-  <a href="/slice"><button class="game-mode">Return to Games List</button></a>
+  <a href="/modes"><button class="game-mode">Return to Games List</button></a>
 
   
   <h1>{$page.params.gamemode}</h1>

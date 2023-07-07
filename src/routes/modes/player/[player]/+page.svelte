@@ -20,7 +20,8 @@ onMount(() => {
 <!-- recent games table (diff page..?) -->
 {#if data.games}
 <h2 style="display:flex;justify-content:center;align-items:center;">{$page.params.player}</h2>
-<table>
+<div class="table-container">
+<table  class="table">
   <thead>
       <tr>
           <th>Away Player</th>
@@ -35,16 +36,17 @@ onMount(() => {
   <tbody>
       {#each data.games as games}
               <tr>
-                <td class="player-link"><a class="player" href={`/slice/player/${games.away_user}`}>{games.away_user}</a></td>
+                <td class="player-link"><a class="player" href={`/modesS/player/${games.away_user}`}>{games.away_user}</a></td>
                 <td>{games.away_score}</td>
                   <td>{games.home_score}</td>
-                  <td class="player-link"><a class="player" href={`/slice/player/${games.home_user}`}>{games.home_user}</a></td>
+                  <td class="player-link"><a class="player" href={`/modes/player/${games.home_user}`}>{games.home_user}</a></td>
                   <td>{stadiums[games.stadium]}</td>
-                  <td class="mode"><a href={`/slice/${tagsetsData.find(tagset => tagset.id === games.game_mode)?.name}`}/ladder>{tagsetsData.find(tagset => tagset.id === games.game_mode)?.name || ''}</a></td>
+                  <td class="modes"><a href={`/modes/${tagsetsData.find(tagset => tagset.id === games.game_mode)?.name}`}/ladder>{tagsetsData.find(tagset => tagset.id === games.game_mode)?.name || ''}</a></td>
 
                   <td>{new Date(games.date_time_start * 1000).toLocaleString()}</td>
               </tr>
       {/each}
   </tbody>
 </table>
+</div>
 {/if}

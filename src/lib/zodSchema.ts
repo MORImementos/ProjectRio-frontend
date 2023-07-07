@@ -73,20 +73,21 @@ export const Tagset = z.object({
         .min(1, { message: 'Community description is too short'})
         .trim(),
     type: z
-        .enum(["Official", "Unofficial"], { required_error: 'Enter a valid type' }),
+        .enum(["Tournament", "Season", "Ladder"], { required_error: 'Enter a valid type' }),
+    community_name: z
+        .string({ required_error: 'Enter a valid community name' })
+        .max(COMMUNITY_CHARACTER_LIMIT, { message: 'Community name is too long' })
+        .min(1, { message: 'Community name is too short' })
+        .trim(),
     tags: z
         .array(z.number()),
-    private: z
-        .union([
-            z.literal('on').transform(() => true),
-            z.literal('undefined').transform(() => false),
-        ])
-        .default(false),
-    global_link: z
-        .union([
-            z.literal('on').transform(() => true),
-            z.literal('undefined').transform(() => false),
-        ])
-        .default(false),
+    tag_set_id: z
+        .number(),
+    start_date: z
+        .number()
+        .transform((val) => new Date(val), (val) => val.getTime().toString()),
+    end_date: z
+        .number()
+        .transform((val) => new Date(val), (val) => val.getTime().toString()),
 
 })

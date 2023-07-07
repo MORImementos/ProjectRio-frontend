@@ -1,28 +1,31 @@
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-import { Community } from '$lib/zodSchema';
+import { Tagset } from '$lib/zodSchema';
 import { fail, redirect } from '@sveltejs/kit';
-import { BACKEND, COMMUNITY_ENDPOINTS } from '$lib/constants';
+import { BACKEND, UNCATEGORIZED_ENDPOINTS } from '$lib/constants';
 import type { Actions } from './$types';
 
 // assign schema for form
-const communityCreate = Community.pick({
-    community_name: true,
+const tagsetCreate = Tagset.pick({
+    name: true,
+    desc: true,
     type: true,
-    private: true,
-    global_link: true,
-    desc: true
+    community_name: true,
+    tags: true,
+    tag_set_id: true,
+    start_date: true,
+    end_date: true,
 })
 
 // infer type of schema
-type communityCreate = z.infer<typeof communityCreate>
+type tagsetCreate = z.infer<typeof tagsetCreate>
 
 // on page load, check for jwt and redirect if jwt present
-export const load = async ({ event, fetch, cookies }) => {
+export const load = async ({ event, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
-    const form = await superValidate(event, communityCreate);
+    const form = await superValidate(event, tagsetCreate);
     return {
         form
     };
@@ -30,8 +33,8 @@ export const load = async ({ event, fetch, cookies }) => {
 
 // on submit if form is valid, create community. if not, throw error
 export const actions = {
-    default: async ({ cookies, request, fetch }) => {
-        const form = await superValidate(request, communityCreate);
+    default: async ({ request, fetch }) => {
+        const form = await superValidate(request, tagsetCreate);
 
         // Convenient validation check:
         if (!form.valid) {
@@ -41,8 +44,8 @@ export const actions = {
         
         console.log(form.data)
         // fetch request
-        console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE)
-        const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE, {
+        console.log(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET)
+        const response = await fetch(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET, {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
             body: JSON.stringify(form.data),
@@ -51,19 +54,21 @@ export const actions = {
         console.log(response.status)
         // if community creation unsuccessful
         if (response.status !== 200) {
-            {
-                // this is all just a way to parse the html error received. I'm still not certain if I intend to do anything with it or not yet, since a generic error might be all that's needed.
-                const reader = response.body?.getReader()
-                const reading = true;
-                const errorObj = {}
-                while (reading) {
-                    const { done, value } = await reader?.read()
-                    if (done) break
-                    const val = new TextDecoder().decode(value)
-                    errorObj[val] = val
-                }
-                // return error
-                return fail(response.status, { form })
+        {
+            // This is all just a way to parse the HTML error received. I'm still not certain if I intend to do anything with it or not yet since a generic error might be all that's needed.
+            const reader = response.body?.getReader();
+            const reading = true;
+            const errorObj = {};
+
+            while (reading) {
+                const { done, value } = (reader ?? {}).read(); // Use nullish coalescing operator to handle undefined reader
+            if (done) break;
+            const val = new TextDecoder().decode(value);
+            errorObj[val] = val;
+        }
+
+  // Return error
+  return fail(response.status, { form });
             }
         }
         const res = await response.json();

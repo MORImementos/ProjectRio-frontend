@@ -9,6 +9,7 @@
 			<li><button class="btn variant-filled-primary m-2"><a href="/community">community</a></button></li>
 			<li><button class="btn variant-filled-primary m-2"><a href="/stats">stats</a></button></li>
 			<li><button class="btn variant-filled-primary m-2"><a href="/modes">modes</a></button></li>
+			<li><button class="btn variant-filled-primary m-2"><a href="/tag_set/create">create tagset</a></button></li>
 		</ul>
 	</div>
 </div>

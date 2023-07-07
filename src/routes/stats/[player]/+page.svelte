@@ -4,6 +4,7 @@
   </script>
   
   {#if data}
+  
     <section class="grid grid-cols-2 md:grid-cols-2 gap-4 h-screen">
       {#each Object.entries(data.data.Stats) as [key, value]}
         <div class="table-container">

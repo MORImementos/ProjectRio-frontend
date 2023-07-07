@@ -54,7 +54,8 @@ export enum POPULATE_DB_ENDPOINTS {
 export enum UNCATEGORIZED_ENDPOINTS {
     RECREATE_STAT_FILE = '/recreate_stat_file/',
     GET_TAG_SET = '/tag_set/ladder/',
-    TAG_LIST = '/tag/list/'
+    TAG_LIST = '/tag/list/',
+    CREATE_TAG_SET = '/tag_set/create/',
 }
 
 export const GET = async (endpoint: string, param='') => {
@@ -81,4 +82,9 @@ export const COMMUNITY_TYPES = [
     'Unofficial',
 ]
 
-export const 
+export const TAGSET_TYPES = [
+    'League',
+    'Season',
+    'Tournament',
+]
+// export const 
