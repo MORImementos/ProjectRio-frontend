@@ -36,7 +36,7 @@ onMount(() => {
   <tbody>
       {#each data.games as games}
               <tr>
-                <td class="player-link"><a class="player" href={`/modesS/player/${games.away_user}`}>{games.away_user}</a></td>
+                <td class="player-link"><a class="player" href={`/modes/player/${games.away_user}`}>{games.away_user}</a></td>
                 <td>{games.away_score}</td>
                   <td>{games.home_score}</td>
                   <td class="player-link"><a class="player" href={`/modes/player/${games.home_user}`}>{games.home_user}</a></td>

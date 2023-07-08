@@ -32,7 +32,7 @@ export enum USER_ENDPOINTS {
 export enum COMMUNITY_ENDPOINTS {
     COMMUNITY_CREATE = '/community/create',
     COMMUNITY_JOIN = '/community/join/',
-    COMMUNITY_INVITE = '/community/invite/',
+    COMMUNITY_INVITE = '/community/invite',
     COMMUNITY_MEMBERS = '/community/members/',
     COMMUNITY_TAGS = '/community/tags/',
     COMMUNITY_MANAGE = '/community/manage/',
@@ -54,6 +54,7 @@ export enum POPULATE_DB_ENDPOINTS {
 export enum UNCATEGORIZED_ENDPOINTS {
     RECREATE_STAT_FILE = '/recreate_stat_file/',
     GET_TAG_SET = '/tag_set/ladder/',
+    TAGSET_LIST = '/tag_set/list',
     TAG_LIST = '/tag/list/',
     CREATE_TAG_SET = '/tag_set/create/',
 }
@@ -67,7 +68,6 @@ export const GET = async (endpoint: string, param='') => {
 export enum USERNAME {
     
 }
-
 // USER
 export const USERNAME_CHARACTER_LIMIT = 64;
 export const PASSWORD_CHARACTER_LIMIT = 500;
@@ -88,3 +88,5 @@ export const TAGSET_TYPES = [
     'Tournament',
 ]
 // export const 
+
+export const CURRENT_SEASON_OFF = "starsoffseason6"

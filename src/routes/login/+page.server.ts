@@ -4,6 +4,7 @@ import { User } from '../../lib/zodSchema'
 import { fail, redirect } from '@sveltejs/kit';
 import { BACKEND, USER_ENDPOINTS, POST } from '../../lib/constants';
 import type { Actions } from './$types'
+import { username } from '$lib/stores/user'
 
 // assign schema for form
 const userLogin = User.pick({
@@ -48,12 +49,12 @@ export const actions = {
             {
                 // this is all just a way to parse the html error received. I'm still not certain if I intend to do anything with it or not yet, since a generic error might be all that's needed.
                 const reader = response.body?.getReader()
-                let reading = true;
-                let errorObj = {}
+                const reading = true;
+                const errorObj = {}
                 while (reading) {
                     const { done, value } = await reader?.read()
                     if (done) break
-                    let val = new TextDecoder().decode(value)
+                    const val = new TextDecoder().decode(value)
                     errorObj[val] = val
                 }
                 // return error
@@ -64,6 +65,7 @@ export const actions = {
 
         // if login successful
         if (response.status === 200) {
+            console.log(res)
             // if login includes jwt
             if (res.access_token) {
                 const jwt = res.access_token
@@ -74,6 +76,10 @@ export const actions = {
                     httpOnly: false,
                     maxAge: 60 * 60 * 24 * 7
                 })
+            }
+
+            if (res.username) {
+                username.set(res.username) 
             }
         }
         /* Yep, return { form } here too (apparently superforms really wants you to return forms)

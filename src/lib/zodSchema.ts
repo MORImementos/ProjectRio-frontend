@@ -91,3 +91,9 @@ export const Tagset = z.object({
         .transform((val) => new Date(val), (val) => val.getTime().toString()),
 
 })
+
+export const GenericForm = z.object({
+    GenericArray: z
+        .array(z.string()).min(1)
+})
+
