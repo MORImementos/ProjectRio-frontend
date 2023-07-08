@@ -21,7 +21,7 @@
 
     <label for="community_name">community name</label>
     <input
-    class="text-primary-50-900-token"
+    class="text-primary-200-700-token"
     type="text"
     name="community_name"
 
@@ -34,7 +34,7 @@
 
     <label for="type">type</label>
     <select
-      class="text-primary-50-900-token"
+      class="text-primary-200-700-token"
       name="type"
       aria-invalid={$errors.type ? 'true' : undefined}
       bind:value={$form.type}
@@ -71,7 +71,7 @@
 
     <label for="desc">description</label>
     <textarea
-    class="text-primary-50-900-token"
+    class="text-primary-200-700-token"
         name="desc"
         aria-invalid={$errors.desc ? 'true' : undefined}
         bind:value={$form.desc}

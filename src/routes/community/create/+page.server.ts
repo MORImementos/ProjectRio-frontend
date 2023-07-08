@@ -18,7 +18,7 @@ const communityCreate = Community.pick({
 type communityCreate = z.infer<typeof communityCreate>
 
 // on page load, check for jwt and redirect if jwt present
-export const load = async ({ event, fetch, cookies }) => {
+export const load = async ({ event, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
@@ -30,7 +30,7 @@ export const load = async ({ event, fetch, cookies }) => {
 
 // on submit if form is valid, create community. if not, throw error
 export const actions = {
-    default: async ({ cookies, request, fetch }) => {
+    default: async ({ request, fetch }) => {
         const form = await superValidate(request, communityCreate);
 
         // Convenient validation check:
@@ -39,7 +39,17 @@ export const actions = {
             return fail(400, { form });
         }
         
-        console.log(form.data)
+        // console.log(form.data)
+        if (!form.data.private) {
+            form.data.private = false
+            console.log(form.data)
+        }
+
+        if (!form.data.global_link) {
+            form.data.global_link = false
+
+            console.log(form.data)
+        }
         // fetch request
         console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE)
         const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE, {
@@ -49,6 +59,7 @@ export const actions = {
         })
         
         console.log(response.status)
+        // console.log('response', request.headers)
         // if community creation unsuccessful
         if (response.status !== 200) {
             {

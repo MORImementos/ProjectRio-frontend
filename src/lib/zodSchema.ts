@@ -43,14 +43,14 @@ export const Community = z.object({
             z.literal('on').transform(() => true),
             z.literal('undefined').transform(() => false),
         ])
-        .default(false)
+        .default(undefined)
         .optional(),
     global_link: z
         .union([
             z.literal('on').transform(() => true),
             z.literal('undefined').transform(() => false),
         ])
-        .default(false)
+        .default(undefined)
         .optional(),
     desc: z
         .string({ required_error: 'Enter a valid description' })

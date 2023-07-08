@@ -34,6 +34,10 @@
 <div>
     <div class="flex justify-between align-middle items-center">
     <h1 class="h1 flex">Game Modes</h1>
+    <h2 class="h2 flex">
+        
+    </h2>
+
     <label class="label">
         <input class="checkbox" type="checkbox" bind:checked={showPassedDates} />
         Show modes that have ended.

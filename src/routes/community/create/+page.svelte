@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { PageData } from './$types';
+    import type { Writable } from 'svelte/store';
     import { superForm } from 'sveltekit-superforms/client';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
   
@@ -7,13 +8,13 @@
   
     // Client API:
     const { form, errors, constraints, enhance } = superForm(data.form);
-  
+    
   </script>
   
   {#if data}
   <!-- <div>{data.username}</div> -->
   {/if}
-  <!-- <SuperDebug data={$form} /> -->
+  <SuperDebug data={$form} />
   <div class="flex items-center justify-center h-screen ">
     <div class="p-4 md:p-10 flex bg-gradient-to-br variant-gradient-primary-secondary w-[80%] h-[80%] rounded-container-token shadow-2xl space-y-10">
   <form method="POST" class="flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 w-[80%] h-full shadow-2xl" use:enhance>

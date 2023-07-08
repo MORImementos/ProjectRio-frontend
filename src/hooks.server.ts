@@ -27,6 +27,8 @@ export const handleFetch = (async ({ event, request, fetch }) => {
             // if not login, set Authorization header
             if (jwt) {
                 request.headers.set('Authorization', `Bearer ${jwt}`)
+                // console.log(request.headers)
+                // console.log('test')
             }
         }
     }
