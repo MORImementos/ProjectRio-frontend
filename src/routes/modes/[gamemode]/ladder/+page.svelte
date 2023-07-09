@@ -2,7 +2,7 @@
     // Import store
     import { page } from '$app/stores';
 	import { BACKEND, UNCATEGORIZED_ENDPOINTS } from '$lib/constants';
-
+  import { titleCase } from '$lib/utils';
     // right now this isn't working ...?
     import { sortableTableAction } from 'svelte-legos';
     // Import components
@@ -35,10 +35,12 @@
   
   </script>
 
-  <a href="/modes"><button class="game-mode">Return to Games List</button></a>
-
-  
-  <h1>{$page.params.gamemode}</h1>
+  <!-- <a href="/modes"><button class="game-mode">Return to Games List</button></a> -->
+  <div class="flex-auto">
+  <a href={`/modes/` + $page.params.gamemode + `/peak`}><input type="checkbox" id="peak" name="peak">
+    <label for="peak">View player peaks for this Game Mode.</label></a>
+  </div>
+  <h1>{titleCase($page.params.gamemode)}</h1>
   <section class="table-container">
     <table class="table" use:sortableTableAction>
       <thead>
