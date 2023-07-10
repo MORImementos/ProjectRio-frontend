@@ -1,0 +1,231 @@
+{
+    "/api_key/register/": {
+        "Username": "string"
+    },
+    "/api_key/reset/": {
+        "Email": "string"
+    },
+    "/community/create": {
+        "global_link": "string",
+        "desc": "string",
+        "community_name": "string",
+        "type": "string",
+        "private": "string"
+    },
+    "/community/join/<comm_name>": {},
+    "/community/join/<comm_name>/<active_url>": {},
+    "/community/join": {
+        "community_name": "string",
+        "URL": "string"
+    },
+    "/community/invite": {
+        "community_name": "string",
+        "invite_list": []
+    },
+    "/community/manage": {
+        "community_name": "string",
+        "user_list": []
+    },
+    "/community/sponsor": {
+        "action": "string",
+        "community_name": "string"
+    },
+    "/community/key": {
+        "action": "string",
+        "community_name": "string"
+    },
+    "/community/update": {
+        "name": "string",
+        "community_id": 0,
+        "active_tag_set_limit": "string",
+        "desc": "string",
+        "type": "string",
+        "private": "string",
+        "link": "string"
+    },
+    "/db_to_sqlite/": {
+        "ADMIN_KEY": "string"
+    },
+    "/init_db/": {
+        "ADMIN_KEY": "string"
+    },
+    "/wipe_db/": {
+        "ADMIN_KEY": "string"
+    },
+    "/delete_game/": {
+        "game_id": 0
+    },
+    "/populate_db/ongoing_game/": {
+        "Away Captain": "string",
+        "Home Roster 4 CharID": "string",
+        "Away Roster 3 CharID": "string",
+        "Away Roster 8 CharID": "string",
+        "Home Roster 7 CharID": "string",
+        "Home Roster 8 CharID": "string",
+        "Away Roster 5 CharID": "string",
+        "Home Roster 5 CharID": "string",
+        "Outs": "string",
+        "Runner 3B": "string",
+        "Runner 2B": "string",
+        "Away Roster 7 CharID": "string",
+        "Away Stars": "string",
+        "Away Roster 1 CharID": "string",
+        "GameID": "string",
+        "Away Roster 6 CharID": "string",
+        "Home Roster 6 CharID": "string",
+        "Home Player": "string",
+        "Home Stars": "string",
+        "TagSetID": "string",
+        "Pitcher": "string",
+        "Inning": "string",
+        "Runner 1B": "string",
+        "Home Roster 2 CharID": "string",
+        "Away Score": "string",
+        "Home Roster 0 CharID": "string",
+        "Half Inning": "string",
+        "Home Score": "string",
+        "Home Roster 3 CharID": "string",
+        "Home Roster 1 CharID": "string",
+        "Date - Start": "string",
+        "StadiumID": "string",
+        "Batter": "string",
+        "Away Roster 0 CharID": "string",
+        "Away Roster 2 CharID": "string",
+        "Away Roster 4 CharID": "string",
+        "Home Captain": "string",
+        "Away Player": "string"
+    },
+    "/ongoing_game/prune": {
+        "seconds": "string"
+    },
+    "/populate_db/": {
+        "StadiumID": "string",
+        "Innings Played": "string",
+        "Average Ping": "string",
+        "Lag Spikes": "string",
+        "Date - End": "string",
+        "Character Game Stats": "string",
+        "Home Score": "string",
+        "Away Score": "string",
+        "Quitter Team": "string",
+        "Innings Selected": "string",
+        "GameID": "string",
+        "Netplay": "string",
+        "Version": "string",
+        "Events": "string",
+        "Date - Start": "string",
+        "Away Player": "string",
+        "Home Player": "string",
+        "TagSetID": "string"
+    },
+    "/manual_submit_game/": {
+        "loser_score": "string",
+        "tag_set": "string",
+        "loser_username": "string",
+        "game_id_hex": 0,
+        "date": "string",
+        "submitter_rio_key": "string",
+        "winner_score": "string",
+        "winner_username": "string",
+        "game_id_dec": 0
+    },
+    "/update_game_status/": {
+        "game_id": 0,
+        "game_history_id": 0
+    },
+    "/recalc_elo/": {
+        "tag_set_id": 0
+    },
+    "/submit_reverification/": {
+        "Username": "string",
+        "Password": "string",
+        "Rio Key": "string",
+        "Email": "string"
+    },
+    "/gen_woba_data/": {},
+    "/tag/create": {
+        "name": "string",
+        "Desc": "string",
+        "community_name": "string",
+        "desc": "string",
+        "type": "string",
+        "Code": "string"
+    },
+    "/tag/update": {
+        "name": "string",
+        "gecko_code_desc": "string",
+        "desc": "string",
+        "type": "string",
+        "tag_id": 0,
+        "gecko_code": "string"
+    },
+    "/tag/list": {
+        "Communities": "string",
+        "Client": "string",
+        "Types": "string"
+    },
+    "/tag_set/create": {
+        "name": "string",
+        "start_date": "string",
+        "end_date": "string",
+        "community_name": "string",
+        "desc": "string",
+        "type": "string",
+        "tags": "string",
+        "tag_set_id": 0
+    },
+    "/tag_set/list": {
+        "Communities": "string",
+        "Key": "string",
+        "Active": "string",
+        "Client": "string"
+    },
+    "/tag_set/update": {
+        "name": "string",
+        "start_date": "string",
+        "end_date": "string",
+        "desc": "string",
+        "type": "string",
+        "tag_set_id": 0,
+        "tag_ids": 0
+    },
+    "/tag_set/ladder": {},
+    "/tag_set/ladder/": {
+        "TagSet": "string"
+    },
+    "/register/": {
+        "Username": "string",
+        "Password": "string",
+        "Email": "string"
+    },
+    "/verify_email/<active_url>": {},
+    "/request_password_change/": {
+        "username_or_email": "string"
+    },
+    "/change_password/": {
+        "password": "string",
+        "active_url": "string"
+    },
+    "/login/": {
+        "Password": "string",
+        "Email": "string"
+    },
+    "/set_privacy/": {},
+    "/user/prune": {},
+    "/user_group/create": {
+        "daily_limit": "string",
+        "weekly_limit": "string",
+        "group_name": "string",
+        "sponsor_limit": "string"
+    },
+    "/user_group/add_user": {
+        "ADMIN_KEY": "string",
+        "username": "string",
+        "group_name": "string"
+    },
+    "/patreon/refresh/": {},
+    "/patreon/list": {},
+    "/user_group/add_all_users": {
+        "group_name": "string"
+    }
+}

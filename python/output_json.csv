@@ -1,0 +1,319 @@
+{
+    "endpoints": [
+        {
+            "/api_key/register/": [
+                "Username"
+            ]
+        },
+        {
+            "/api_key/reset/": [
+                "Email"
+            ]
+        },
+        {
+            "/community/create": [
+                "desc",
+                "community_name",
+                "private",
+                "type",
+                "global_link"
+            ]
+        },
+        {
+            "/community/join/<comm_name>": []
+        },
+        {
+            "/community/join/<comm_name>/<active_url>": []
+        },
+        {
+            "/community/join": [
+                "community_name",
+                "URL"
+            ]
+        },
+        {
+            "/community/invite": [
+                "invite_list",
+                "community_name"
+            ]
+        },
+        {
+            "/community/manage": [
+                "community_name",
+                "user_list"
+            ]
+        },
+        {
+            "/community/sponsor": [
+                "community_name",
+                "action"
+            ]
+        },
+        {
+            "/community/key": [
+                "community_name",
+                "action"
+            ]
+        },
+        {
+            "/community/update": [
+                "active_tag_set_limit",
+                "link",
+                "community_id",
+                "desc",
+                "private",
+                "type",
+                "name"
+            ]
+        },
+        {
+            "/db_to_sqlite/": [
+                "ADMIN_KEY"
+            ]
+        },
+        {
+            "/init_db/": [
+                "ADMIN_KEY"
+            ]
+        },
+        {
+            "/wipe_db/": [
+                "ADMIN_KEY"
+            ]
+        },
+        {
+            "/delete_game/": [
+                "game_id"
+            ]
+        },
+        {
+            "/populate_db/ongoing_game/": [
+                "Away Roster 2 CharID",
+                "Home Stars",
+                "Home Captain",
+                "Runner 3B",
+                "Away Roster 5 CharID",
+                "Home Score",
+                "Away Roster 6 CharID",
+                "Away Captain",
+                "Home Roster 2 CharID",
+                "Outs",
+                "GameID",
+                "Home Roster 8 CharID",
+                "Home Roster 3 CharID",
+                "Home Roster 6 CharID",
+                "Home Roster 5 CharID",
+                "Home Player",
+                "Runner 1B",
+                "Half Inning",
+                "Away Player",
+                "Away Roster 0 CharID",
+                "Inning",
+                "Runner 2B",
+                "Away Roster 3 CharID",
+                "Away Roster 1 CharID",
+                "Away Roster 8 CharID",
+                "Home Roster 4 CharID",
+                "Away Roster 7 CharID",
+                "Home Roster 7 CharID",
+                "Away Stars",
+                "Away Roster 4 CharID",
+                "TagSetID",
+                "Home Roster 1 CharID",
+                "Batter",
+                "StadiumID",
+                "Pitcher",
+                "Away Score",
+                "Home Roster 0 CharID",
+                "Date - Start"
+            ]
+        },
+        {
+            "/ongoing_game/prune": [
+                "seconds"
+            ]
+        },
+        {
+            "/populate_db/": [
+                "Version",
+                "Lag Spikes",
+                "Innings Played",
+                "Away Player",
+                "Average Ping",
+                "Date - End",
+                "Innings Selected",
+                "TagSetID",
+                "Date - Start",
+                "Events",
+                "Home Score",
+                "Quitter Team",
+                "StadiumID",
+                "Character Game Stats",
+                "Away Score",
+                "Home Player",
+                "GameID",
+                "Netplay"
+            ]
+        },
+        {
+            "/manual_submit_game/": [
+                "winner_score",
+                "submitter_rio_key",
+                "loser_username",
+                "tag_set",
+                "winner_username",
+                "game_id_dec",
+                "loser_score",
+                "game_id_hex",
+                "date"
+            ]
+        },
+        {
+            "/update_game_status/": [
+                "game_id",
+                "game_history_id"
+            ]
+        },
+        {
+            "/recalc_elo/": [
+                "tag_set_id"
+            ]
+        },
+        {
+            "/submit_reverification/": [
+                "Username",
+                "Email",
+                "Password",
+                "Rio Key"
+            ]
+        },
+        {
+            "/gen_woba_data/": []
+        },
+        {
+            "/tag/create": [
+                "Desc",
+                "desc",
+                "community_name",
+                "Code",
+                "type",
+                "name"
+            ]
+        },
+        {
+            "/tag/update": [
+                "gecko_code",
+                "tag_id",
+                "desc",
+                "gecko_code_desc",
+                "type",
+                "name"
+            ]
+        },
+        {
+            "/tag/list": [
+                "Communities",
+                "Client",
+                "Types"
+            ]
+        },
+        {
+            "/tag_set/create": [
+                "tags",
+                "start_date",
+                "tag_set_id",
+                "end_date",
+                "desc",
+                "community_name",
+                "type",
+                "name"
+            ]
+        },
+        {
+            "/tag_set/list": [
+                "Active",
+                "Communities",
+                "Client",
+                "Key"
+            ]
+        },
+        {
+            "/tag_set/update": [
+                "start_date",
+                "tag_set_id",
+                "tag_ids",
+                "end_date",
+                "desc",
+                "type",
+                "name"
+            ]
+        },
+        {
+            "/tag_set/ladder": []
+        },
+        {
+            "/tag_set/ladder/": [
+                "TagSet"
+            ]
+        },
+        {
+            "/register/": [
+                "Username",
+                "Email",
+                "Password"
+            ]
+        },
+        {
+            "/verify_email/<active_url>": []
+        },
+        {
+            "/request_password_change/": [
+                "username_or_email"
+            ]
+        },
+        {
+            "/change_password/": [
+                "active_url",
+                "password"
+            ]
+        },
+        {
+            "/login/": [
+                "Email",
+                "Password"
+            ]
+        },
+        {
+            "/set_privacy/": []
+        },
+        {
+            "/user/prune": []
+        },
+        {
+            "/user_group/create": [
+                "weekly_limit",
+                "group_name",
+                "daily_limit",
+                "sponsor_limit"
+            ]
+        },
+        {
+            "/user_group/add_user": [
+                "ADMIN_KEY",
+                "group_name",
+                "username"
+            ]
+        },
+        {
+            "/patreon/refresh/": []
+        },
+        {
+            "/patreon/list": []
+        },
+        {
+            "/user_group/add_all_users": [
+                "group_name"
+            ]
+        }
+    ]
+}
