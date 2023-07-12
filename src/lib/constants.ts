@@ -36,7 +36,7 @@ export enum COMMUNITY_ENDPOINTS {
     COMMUNITY_MEMBERS = '/community/members/',
     COMMUNITY_TAGS = '/community/tags/',
     COMMUNITY_MANAGE = '/community/manage/',
-    COMMUNITY_SPONSOR = '/community/sponsor/',
+    COMMUNITY_SPONSOR = '/community/sponsor',
     COMMUNITY_KEY = '/community/key/',
     COMMUNITY_UPDATE = '/community/update/',
 }

@@ -1,17 +1,18 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+    import type { PageData, ActionData } from './$types';
     import { superForm } from 'sveltekit-superforms/client';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
   
     export let data: PageData;
-  
+    // export let formData: ActionData
     // Client API:
+    export let formRes: ActionData
     const { form, errors, constraints, enhance } = superForm(data.form);
   
   </script>
   
-  {#if data}
-  <!-- <div>{data.username}</div> -->
+  {#if formRes?.sponsor}
+    <p>hi</p>
   {/if}
   <!-- <SuperDebug data={$form} /> -->
   <div class="flex items-center justify-center h-screen ">
@@ -32,52 +33,23 @@
 </div>
 <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[20%]">
 
-    <label for="type">type</label>
+    <label for="action">action</label>
     <select
       class="text-primary-200-700-token"
-      name="type"
-      aria-invalid={$errors.type ? 'true' : undefined}
-      bind:value={$form.type}
-      {...$constraints.type}>
-      <!-- <option value="">Select type</option> -->
-      <option value="Unofficial" selected>Unofficial</option>
-      <option value="Official">Official</option>
+      name="action"
+      aria-invalid={$errors.action ? 'true' : undefined}
+      bind:value={$form.action}
+      {...$constraints.action}>
+      <!-- <option value="">Select action</option> -->
+      <option value="get" selected>Get sponsor of {$form.community_name}</option>
+      <option value="remove">Remove sponsorship of {$form.community_name}</option>
+      <option value="add">Sponsor {$form.community_name}</option>
+
       <!-- <option value="option3">Option 3</option> -->
     </select>
-    {#if $errors.type}<span class="invalid">{$errors.type}</span>{/if}
+    {#if $errors.action}<span class="invalid">{$errors.action}</span>{/if}
 </div>
-    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[15%]">
-    <label for="private">private</label>
-    <input
-      type="checkbox"
-      name="private"
-      aria-invalid={$errors.private ? 'true' : undefined}
-      bind:checked={$form.private}
-      {...$constraints.private} />
-    {#if $errors.private}<span class="invalid">{$errors.private}</span>{/if}
-  </div>
-  <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[15%]">
 
-    <label for="global_link">global link</label>
-    <input
-      type="checkbox"
-      name="global_link"
-      aria-invalid={$errors.global_link ? 'true' : undefined}
-      bind:checked={$form.global_link}
-      {...$constraints.global_link} />
-    {#if $errors.global_link}<span class="invalid">{$errors.global_link}</span>{/if}
-</div>
-<div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[20%]">
-
-    <label for="desc">description</label>
-    <textarea
-    class="text-primary-200-700-token"
-        name="desc"
-        aria-invalid={$errors.desc ? 'true' : undefined}
-        bind:value={$form.desc}
-        {...$constraints.desc}></textarea>
-    {#if $errors.desc}<span class="invalid">{$errors.desc}</span>{/if}
-</div>
 <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[10%]">
     
 <button>Submit</button></div>

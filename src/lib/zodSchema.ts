@@ -97,3 +97,14 @@ export const GenericForm = z.object({
         .array(z.string()).min(1)
 })
 
+
+// /community/sponsor
+export const communitySponsor = z.object({
+    action: z.enum(["get", "remove", "add"], { required_error: 'Enter a valid action.' }),
+    community_name: z
+        .string({ required_error: 'Enter a valid community name' })
+        .max(COMMUNITY_CHARACTER_LIMIT, { message: 'Community name is too long' })
+        .min(1, { message: 'Community name is too short' })
+        .trim(),
+  })
+

@@ -1,37 +1,33 @@
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-import { Community } from '$lib/zodSchema';
+import { communitySponsor } from '$lib/zodSchema';
 import { fail, redirect } from '@sveltejs/kit';
 import { BACKEND, COMMUNITY_ENDPOINTS } from '$lib/constants';
 import type { Actions } from './$types';
 
-// assign schema for form
-const communityCreate = Community.pick({
-    community_name: true,
-    type: true,
-    private: true,
-    global_link: true,
-    desc: true
-})
-
 // infer type of schema
-type communityCreate = z.infer<typeof communityCreate>
+
+const commSponsor = communitySponsor.pick({
+    community_name: true,
+    action: true
+})
+type commSponsor = z.infer<typeof commSponsor>
 
 // on page load, check for jwt and redirect if jwt present
 export const load = async ({ event, fetch, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
-    const form = await superValidate(event, communityCreate);
+    const form = await superValidate(event, commSponsor);
     return {
         form
     };
 };
 
-// on submit if form is valid, create community. if not, throw error
+// on submit if form is valid, Sponsor community. if not, throw error
 export const actions = {
     default: async ({ cookies, request, fetch }) => {
-        const form = await superValidate(request, communityCreate);
+        const form = await superValidate(request, commSponsor);
 
         // Convenient validation check:
         if (!form.valid) {
@@ -39,16 +35,16 @@ export const actions = {
             return fail(400, { form });
         }
         
-        console.log(form.data)
+        // console.log(form.data)
         // fetch request
-        console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE)
-        const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_CREATE, {
+        // console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_SPONSOR)
+        const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_SPONSOR, {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
             body: JSON.stringify(form.data),
         })
         
-        console.log(response.status)
+        // console.log(response.status)
         // if community creation unsuccessful
         if (response.status !== 200) {
             const reader = response.body && response.body.getReader();
@@ -65,20 +61,18 @@ export const actions = {
           }
           
         const res = await response.json();
-
+        const sponsor = res.sponsor
         // if community creation successful
         if (response.status === 200) {
             // Handle the response as needed
             console.log(res)
-        }
 
+        }
         /* Yep, return { form } here too (apparently superforms really wants you to return forms)
         return form and any other relevant data
         TODO: Add any additional data you want to return */
-        return {
-            form: form,
-            msg: res.msg,
-            username: res.username
-        }
+            return {
+                form, sponsor: sponsor,
+            }
     }
 } satisfies Actions;
