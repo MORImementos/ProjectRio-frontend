@@ -31,7 +31,7 @@ export enum USER_ENDPOINTS {
 
 export enum COMMUNITY_ENDPOINTS {
     COMMUNITY_CREATE = '/community/create',
-    COMMUNITY_JOIN = '/community/join/',
+    COMMUNITY_JOIN = '/community/join',
     COMMUNITY_INVITE = '/community/invite',
     COMMUNITY_MEMBERS = '/community/members/',
     COMMUNITY_TAGS = '/community/tags/',

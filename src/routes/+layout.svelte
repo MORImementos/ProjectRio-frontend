@@ -21,7 +21,7 @@
 	// import Footer from '$lib/components/Footer.svelte';
 	// import convertNameToInitials from '$lib/_helpers/convertNameToInitials';
 	import { onMount } from 'svelte';
-	export let data;
+	// export let data;
 
 	import { username } from '$lib/stores/user';
 

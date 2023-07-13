@@ -3,7 +3,7 @@ import { superValidate } from 'sveltekit-superforms/server';
 import { communitySponsor } from '$lib/zodSchema';
 import { fail, redirect } from '@sveltejs/kit';
 import { BACKEND, COMMUNITY_ENDPOINTS } from '$lib/constants';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 // infer type of schema
 
@@ -11,18 +11,20 @@ const commSponsor = communitySponsor.pick({
     community_name: true,
     action: true
 })
+
 type commSponsor = z.infer<typeof commSponsor>
 
 // on page load, check for jwt and redirect if jwt present
-export const load = async ({ event, fetch, cookies }) => {
+export const load = (async ({ event, fetch, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
     const form = await superValidate(event, commSponsor);
     return {
-        form
+        form,
+        
     };
-};
+}) satisfies PageServerLoad;
 
 // on submit if form is valid, Sponsor community. if not, throw error
 export const actions = {
@@ -62,10 +64,14 @@ export const actions = {
           
         const res = await response.json();
         const sponsor = res.sponsor
+        // console.log(sponsor)
         // if community creation successful
         if (response.status === 200) {
             // Handle the response as needed
-            console.log(res)
+            // console.log(res)
+            return {
+                form, sponsor: sponsor,
+            }
 
         }
         /* Yep, return { form } here too (apparently superforms really wants you to return forms)
