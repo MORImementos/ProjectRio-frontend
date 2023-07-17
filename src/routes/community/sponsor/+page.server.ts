@@ -15,11 +15,11 @@ const commSponsor = communitySponsor.pick({
 type commSponsor = z.infer<typeof commSponsor>
 
 // on page load, check for jwt and redirect if jwt present
-export const load = (async ({ event, fetch, cookies }) => {
+export const load = (async ({ fetch, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
-    const form = await superValidate(event, commSponsor);
+    const form = await superValidate(commSponsor);
     return {
         form,
         
@@ -49,16 +49,16 @@ export const actions = {
         // console.log(response.status)
         // if community creation unsuccessful
         if (response.status !== 200) {
-            const reader = response.body && response.body.getReader();
-            const errorObj = {};
-            const reading = true;
-            while (reading) {
-              const { done, value } = await reader.read().catch(() => ({ done: true }));
-              if (done) break;
-              const val = new TextDecoder().decode(value);
-              errorObj[val] = val;
-            }
-          
+            // const reader = response.body && response.body.getReader();
+            // const errorObj = {};
+            // const reading = true;
+            // while (reading) {
+            //   const { done, value } = await reader.read().catch(() => ({ done: true }));
+            //   if (done) break;
+            //   const val = new TextDecoder().decode(value);
+            //   errorObj[val] = val;
+            // }
+            //
             return fail(response.status, { form, error: errorObj });
           }
           

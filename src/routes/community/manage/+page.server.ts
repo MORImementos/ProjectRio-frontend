@@ -3,20 +3,20 @@ import { superValidate } from 'sveltekit-superforms/server';
 // import { GenericForm } from '$lib/zodSchema';
 import { fail, redirect } from '@sveltejs/kit';
 import { BACKEND, COMMUNITY_ENDPOINTS } from '$lib/constants';
-import type { Actions } from './$types';
+import type {Actions, PageServerLoad} from './$types';
 
 // // assign schema for form
 const GenericForm = z.object({
     community_name: z.string(),
-    invite_list: z.array(z.string()).default([]),
+    user_list: z.array(z.string()).default([]),
     // Add other properties if needed
-  });
-  
+});
+
 // infer type of schema
 // type communityCreate = z.infer<typeof communityCreate>
 
 // on page load, check for jwt and redirect if jwt present
-export const load = async ({ event, fetch, cookies }) => {
+export const load = (async ({ event, fetch, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
 
@@ -24,7 +24,7 @@ export const load = async ({ event, fetch, cookies }) => {
     return {
         form
     };
-};
+}) satisfies PageServerLoad;
 
 // on submit if form is valid, create community. if not, throw error
 export const actions = {
@@ -36,16 +36,16 @@ export const actions = {
             // Again, always return { form } and things will just work. (superforms comment)
             return fail(400, { form });
         }
-        
+
         console.log(form.data)
         // fetch request
-        console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_INVITE)
-        const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_INVITE, {
+        console.log(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_MANAGE)
+        const response = await fetch(BACKEND + COMMUNITY_ENDPOINTS.COMMUNITY_MANAGE, {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
             body: JSON.stringify(form.data),
         })
-        
+
         console.log(response.status)
         // if community creation unsuccessful
         if (response.status !== 200) {

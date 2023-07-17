@@ -42,7 +42,7 @@
   </div>
   <h1>{titleCase($page.params.gamemode)}</h1>
   <section class="table-container">
-    <table class="table" use:sortableTableAction>
+    <table class="table table-hover table-interactive" use:sortableTableAction>
       <thead>
       <tr>
         <th>#</th>
@@ -54,15 +54,20 @@
       <tbody>
       {#if players}
         {#each players as player, i}
-          <tr>
+          <tr class="">
             <td>{i + 1}</td>
             <td>{player.rating}</td>
-            <td class="player-link"><a class="player" href={`/modes/player/${player.username}`}>{player.username}</a></td>
+            <td class="player-link "><a class="player decoration-transparent" href={`/modes/player/${player.username}`}>{player.username}</a></td>
             <td>{player.num_wins}/{player.num_losses}/{player.num_ties}</td>
           </tr>
         {/each}
       {/if}
-      <tr></tr>
     </tbody>
     </table>
   </section>
+
+  <style>
+    td a {
+      color: rgba(var(--text-neutral-500) / 1) !important; 
+    }
+  </style>

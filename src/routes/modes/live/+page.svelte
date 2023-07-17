@@ -162,4 +162,6 @@
     </table>
     </div>
   </div>
+{:else}
+  <h1 class="h1">No games are being played right now. The page will refresh automatically and update when there are active games.</h1>
 {/if}

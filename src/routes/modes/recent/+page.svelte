@@ -46,7 +46,7 @@
 {#if data.games}
 <div class="flex justify-center items-center mx-auto transition-[width] duration-200 w-full ">
   <div class="table-container text-token">
-    <h2 class="h2">Live Games</h2>
+    <h2 class="h2">Recent Games</h2>
     <table class="table table-hover" use:sortableTableAction>
       <thead>
         <tr>

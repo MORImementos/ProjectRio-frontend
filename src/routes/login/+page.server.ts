@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { superValidate } from 'sveltekit-superforms/server'
 import { User } from '../../lib/zodSchema'
 import { fail, redirect } from '@sveltejs/kit';
-import { BACKEND, USER_ENDPOINTS, POST } from '../../lib/constants';
+import { BACKEND, USER_ENDPOINTS } from '$lib/constants';
 import type { Actions } from './$types'
 import { username } from '$lib/stores/user'
 

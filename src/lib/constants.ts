@@ -25,8 +25,10 @@ export enum USER_ENDPOINTS {
     REQUEST_NEW_RIO_KEY = '/request_new_rio_key/',
     SET_PRIVACY = '/set_privacy/',
     USER_TAGS = '/user/tags/',
-    USER_COMMUNITIES = '/user/communities/',
+    USER_COMMUNITY = '/user/community/',
     USER_PRUNE = '/user/prune/',
+    USER_ALL = '/user/all',
+    USER_COMMUNITY_SPONSOR = '/user/community/sponsor/',
 }
 
 export enum COMMUNITY_ENDPOINTS {
@@ -50,12 +52,11 @@ export enum POPULATE_DB_ENDPOINTS {
     RECALC_ELO = '/recalc_elo/',
 
 }
-
 export enum UNCATEGORIZED_ENDPOINTS {
     RECREATE_STAT_FILE = '/recreate_stat_file/',
     GET_TAG_SET = '/tag_set/ladder/',
     TAGSET_LIST = '/tag_set/list',
-    TAG_LIST = '/tag/list/',
+    TAG_LIST = '/tag/list',
     CREATE_TAG_SET = '/tag_set/create/',
 }
 

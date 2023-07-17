@@ -64,8 +64,9 @@
 		<Nav user={username} />
 	</svelte:fragment>
 	<!-- Main Content -->
-	<div class="container lg:p-10 mx-auto">
+	<div class="container lg:p-10 mx-auto text-token">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter"></svelte:fragment>
 </AppShell>
+

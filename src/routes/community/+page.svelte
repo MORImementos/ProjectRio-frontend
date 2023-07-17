@@ -13,4 +13,9 @@
 <button>
     <a href="/community/sponsor">sponsor</a>
 </button>
-<button>placeholder</button>
+<button>    
+    <a href="/community/invite">invite</a>
+</button>
+<button>    
+    <a href="/community/join">join</a>
+</button>

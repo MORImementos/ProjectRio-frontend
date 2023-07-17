@@ -9,7 +9,7 @@
     const { form, errors, constraints, enhance } = superForm(data.form);
   
   </script>
-  
+
   <div class="flex items-center justify-center h-screen ">
     <div class="p-4 md:p-10 flex bg-gradient-to-br variant-gradient-primary-secondary w-[80%] h-[80%] rounded-container-token shadow-2xl space-y-10">
       <form method="POST" class="flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 w-[80%] h-full shadow-2xl" use:enhance>
@@ -28,14 +28,14 @@
           {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}
       </div>
         <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[20%]">
-          <label for="invite">Invite List (separate names with commas)</label>
+          <label for="invite_list">Invite List (separate names with commas)</label>
           <input
             class="text-primary-50-900-token"
             type="text"
-            name="invite"
+            name="invite_list"
             aria-invalid={$errors.invite_list ? 'true' : undefined}
-            bind:value={$form.invite}
-            on:input={() => { $form.invite_list = $form.invite.split(',').map((name) => name.trim()) }}
+            bind:value={$form.invite_list}
+            on:input={() => { $form.invite_list = $form.invite_list.split(',').map((name) => name.trim()) }}
           />
           {#if $errors.invite_list}<span class="invalid">{$errors.invite_list}</span>{/if}
         </div>

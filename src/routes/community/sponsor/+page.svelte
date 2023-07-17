@@ -3,20 +3,28 @@
     import { superForm } from 'sveltekit-superforms/client';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
     import { page } from '$app/stores';
-    export let data: PageData;
+    export let data;
     // export let sponsor: ActionData;
     // export let form
     // export let formData: ActionData
     // Client API:
     // export let formRes: ActionData
-    const { form, errors, constraints, enhance } = superForm(data.form);
+    const { form, errors, constraints, enhance, message } = superForm(data.form);
   
   </script>
+{#if $message}
+    <aside class="alert variant-filled-success mt-6">
+        <!-- Message -->
+        <div class="alert-message">
+            <p>{$message}</p>
+        </div>
+    </aside>
+{/if}
 
-  {#if data}
-    {$page.data.sponsor}
-  {/if}
   <!-- <SuperDebug data={$form} /> -->
+{#if form}
+    test
+{/if}
   <div class="flex items-center justify-center h-screen ">
     <div class="p-4 md:p-10 flex bg-gradient-to-br variant-gradient-primary-secondary w-[80%] h-[80%] rounded-container-token shadow-2xl space-y-10">
   <form method="POST" class="flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 w-[80%] h-full shadow-2xl" use:enhance>

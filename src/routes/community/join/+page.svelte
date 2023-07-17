@@ -31,16 +31,23 @@
     {...$constraints.community_name} />
     {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}
 </div>
+    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[20%]">
+
+      <label for="URL">Global link URL (optional)</label>
+      <input
+              class="text-primary-50-900-token"
+              type="text"
+              name="URL"
+
+              aria-invalid={$errors.URL ? 'true' : undefined}
+              bind:value={$form.URL}
+              {...$constraints.URL} />
+      {#if $errors.URL}<span class="invalid">{$errors.URL}</span>{/if}
+    </div>
 <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[10%]">
     
 <button>Join</button></div>
   </form>
   </div>
   </div>
-  
-  <style>
-    .invalid {
-      color: red;
-    }
-  </style>
   
