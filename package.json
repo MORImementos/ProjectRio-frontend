@@ -14,7 +14,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@floating-ui/dom": "^1.4.2",
+		"@floating-ui/dom": "^1.4.5",
 		"@playwright/test": "^1.28.1",
 		"@skeletonlabs/skeleton": "^1.8.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -43,7 +43,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"flowbite": "^1.7.0",
+		"flowbite-svelte": "^0.40.1",
 		"lucide-svelte": "^0.261.0",
-		"svelte-legos": "^0.2.1"
+		"svelte-legos": "^0.2.1",
+		"tailwind-merge": "^1.14.0"
 	}
 }

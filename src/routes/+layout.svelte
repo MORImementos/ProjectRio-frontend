@@ -16,11 +16,12 @@
 		dataTableHandler,
 		drawerStore
 	} from '@skeletonlabs/skeleton';
+	import { browser } from '$app/environment';
+
 	import { Menu } from 'lucide-svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import { APP_NAME } from '$lib/config/constants';
 	// import Footer from '$lib/components/Footer.svelte';
-	// import convertNameToInitials from '$lib/_helpers/convertNameToInitials';
 	import { onMount } from 'svelte';
 	// export let data;
 
@@ -29,17 +30,15 @@
 	function drawerOpen(): void {
 		drawerStore.open();
 	}
-	// let username = '';
-	// onMount(() => {
-	//
-	// });
-	$: if (!$username) {
-		if (localStorage.getItem('username')) {
-			$username = localStorage.getItem('username');
-			console.log($username);
+
+	$: if (browser) {
+		if (!$username) {
+			if (localStorage.getItem('username')) {
+				$username = localStorage.getItem('username');
+				console.log($username);
+			}
 		}
 	}
-
 </script>
 
 <Toast position="tr" />
@@ -61,9 +60,8 @@
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				{#if $username}
-					<Avatar {$username} width="w-10" background="bg-primary-500" />
+<!--					<Avatar {$username} width="w-10" background="bg-primary-500" />-->
 				{/if}
-				<!-- {#if data?.user}<Avatar {username} width="w-10" background="bg-primary-500" />{/if} -->
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

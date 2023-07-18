@@ -1,5 +1,5 @@
 import type { Handle, HandleFetch } from '@sveltejs/kit';
-import { BACKEND } from './lib/constants';
+import { BACKEND } from '$lib/constants';
 import { redirect } from '@sveltejs/kit';
 
 // TODO: add logic for redirecting based on status/jwt presence.

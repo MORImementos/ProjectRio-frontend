@@ -3,33 +3,71 @@
     import { superForm } from 'sveltekit-superforms/client';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
     import { UNCATEGORIZED_ENDPOINTS, GET } from "$lib/constants";
-    import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
-
+    import { AlertTriangle } from 'lucide-svelte';
+    import { InputChip } from '@skeletonlabs/skeleton'
     export let data: PageData;
-  
-    // Client API:
-    const { form, errors, constraints, enhance } = superForm(data.form);
+    export let form;
     import { onMount } from 'svelte';
-
+    import { ConicGradient } from '@skeletonlabs/skeleton';
+    import type { ConicStop } from '@skeletonlabs/skeleton';
+    import { getAllTagSets } from "$lib/helpers/tagNames";
+    import { tagsets } from "$lib/stores/tagsets";
+    // Client API:
+    const { form: formData, errors, constraints, enhance, delayed } = superForm(data.form);
+    const conicStops: ConicStop[] = [
+      { color: 'transparent', start: 0, end: 25 },
+      { color: 'rgb(var(--color-primary-900))', start: 75, end: 100 }
+    ];
     let tags = [];
+    let tagset = [];
+    // onMount(async () => {
+    //   const response = await GET(UNCATEGORIZED_ENDPOINTS.TAG_LIST);
+    //   const res = await response;
+    //   tags = res.Tags;
+    //   console.log(tags);
+    //
+    //   await getAllTagSets()
+    // });
     onMount(async () => {
-      const response = await GET(UNCATEGORIZED_ENDPOINTS.TAG_LIST);
-      const res = await response;
-      tags = res.Tags;
-      console.log(tags);
+      try {
+        const [response, tagSetsResponse] = await Promise.all([
+          GET(UNCATEGORIZED_ENDPOINTS.TAG_LIST),
+          getAllTagSets()
+        ]);
+
+        const res = await response;
+        const tagSets = await tagSetsResponse;
+
+        tags = res.Tags;
+        console.log(tags);
+
+        // Use tagSets data here
+        tagset = $tagsets
+        // console.log(tagSets);
+      } catch (error) {
+        // Handle any errors
+        console.error(error);
+      }
     });
+
   </script>
-<!--    <SuperDebug data={$form} />-->
-
+    <SuperDebug data={$formData} />
+{#if form}
+<p>{form}</p>
+{:else}
 {#if tags}
-  <!-- <SuperDebug data={$form} /> -->
-  <div class="flex items-center justify-center">
-    <div class="p-4 md:p-10 flex bg-gradient-to-br variant-gradient-primary-secondary rounded-container-token shadow-2xl space-y-10">
-  <form method="POST" class="flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 shadow-2xl" use:enhance>
+  <form method="POST" class="card flex-col" use:enhance>
+    {#if $errors._errors}
+      <aside class="alert variant-filled-error mt-6">
+        <div><AlertTriangle size="42" /></div>
+        <div class="alert-message">
+          <h3 class="h3">{"Form Submission Problem"}</h3>
+          <p>{$errors._errors}</p>
+        </div>
+      </aside>
+    {/if}
 
-<!--    <div class="input-group">-->
-
-    <div class="input-group card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
 
       <label class="label" for="name">Name</label>
       <input
@@ -38,12 +76,11 @@
       name="name"
   
       aria-invalid={$errors.name ? 'true' : undefined}
-      bind:value={$form.name}
+      bind:value={$formData.name}
       {...$constraints.name} />
-      {#if $errors.name}<span class="invalid">{$errors.name}</span>{/if}
+      {#if $errors.name}<small class="invalid">{$errors.name}</small>{/if}
   </div>
-<!--      </div>-->
-    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
 
       <label class="label" for="desc">Description</label>
       <textarea
@@ -52,29 +89,27 @@
           name="desc"
           placeholder="Enter description of this game mode."
           aria-invalid={$errors.desc ? 'true' : undefined}
-          bind:value={$form.desc}
+          bind:value={$formData.desc}
           {...$constraints.desc}></textarea>
       {#if $errors.desc}<span class="invalid">{$errors.desc}</span>{/if}
   </div>
-  <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
 
     <label class="label" for="type">Type</label>
     <select
       class="select text-token"
       name="type"
       aria-invalid={$errors.type ? 'true' : undefined}
-      bind:value={$form.type}
+      bind:value={$formData.type}
       {...$constraints.type}>
-      <!-- <option value="">Select type</option> -->
       <option value="Season" selected>Season</option>
       <option value="League">League</option>
       <option value="Tournament">Tournament</option>
 
-      <!-- <option value="option3">Option 3</option> -->
     </select>
     {#if $errors.type}<span class="invalid">{$errors.type}</span>{/if}
 </div>
-    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
 
     <label class="label" for="community_name">community name</label>
     <input class="input text-token"
@@ -82,82 +117,90 @@
     name="community_name"
 
     aria-invalid={$errors.community_name ? 'true' : undefined}
-    bind:value={$form.community_name}
+    bind:value={$formData.community_name}
     {...$constraints.community_name} />
     {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}
 </div>
 
-<!--    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[15%]">-->
-<!--    <label for="tags">tags</label>-->
-<!--    <input-->
-<!--      type="checkbox"-->
-<!--      name="tags"-->
-<!--      aria-invalid={$errors.tags ? 'true' : undefined}-->
-<!--      bind:checked={$form.tags}-->
-<!--      {...$constraints.tags} />-->
-<!--    {#if $errors.tags}<span class="invalid">{$errors.tags}</span>{/if}-->
-<!--  </div>-->
-
-    <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
       <div class="tags">
       <label class="label" for="tags">Tags</label>
-      <select class="select" multiple name="tags" bind:value={$form.tags}>
-        {#each tags as tag}
+<!--      <select class="select" multiple name="tags" bind:value={$formData.tags}>-->
+<!--        {#each tags as tag}-->
+<!--          <span class="chip variant-soft hover:variant-filled">-->
+<!--            <span>(icon)</span>-->
+<!--            <span>Action</span>-->
+<!--          </span>-->
+<!--          <option value={tag.name}>{tag.name}</option>-->
+<!--        {/each}-->
+
+<!--      </select>-->
+        <select class="select" multiple>
+          {#each tags as tag}
           <span class="chip variant-soft hover:variant-filled">
             <span>(icon)</span>
             <span>Action</span>
           </span>
-          <option value={tag.name}>{tag.name}</option>
-        {/each}
+            <option value={tag.name}>{tag.name}</option>
+          {/each}
 
-      </select>
+        </select>
       {#if $errors.tags}<span class="invalid">{$errors.tags}</span>{/if}
+      </div>
+      <div class="chips">
+        <InputChip name="tags" placeholder="Tags..." />
+
+      </div>
+    </div>
+    <div class="m-6">
+      <div class="tag_set_id">
+        <label class="label" for="tag_set_id">tagset id</label>
+        <select class="select" multiple name="tag_set_id" bind:value={$formData.tag_set_id}>
+          {#each tagset as t}
+          <span class="chip variant-soft hover:variant-filled">
+            <span>(icon)</span>
+            <span>Action</span>
+          </span>
+            <option value={t.name}>{t.name}</option>
+          {/each}
+
+        </select>
+        {#if $errors.tag_set_id}<span class="invalid">{$errors.tag_set_id}</span>{/if}
       </div>
       <div class="chips">
 
       </div>
     </div>
-  <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
-
-    <label class="label" for="tag_set_id">tagset id</label>
-    <input class="input variant-form-material"
-      type="checkbox"
-      name="tag_set_id"
-      aria-invalid={$errors.tag_set_id ? 'true' : undefined}
-      bind:checked={$form.tag_set_id}
-      {...$constraints.tag_set_id} />
-    {#if $errors.tag_set_id}<span class="invalid">{$errors.tag_set_id}</span>{/if}
-</div>
-
-    <div class="input-group grid-cols-[auto_1fr_auto] input-group-divider">
-  <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
+    <div class="m-6">
     <label class="label" for="start_date">start date</label>
     <input class="input variant-form-material"
       type="date"
       name="start_date"
       aria-invalid={$errors.start_date ? 'true' : undefined}
-      bind:value={$form.start_date}
+      bind:value={$formData.start_date}
       {...$constraints.start_date} />
     {#if $errors.start_date}<span class="invalid">{$errors.start_date}</span>{/if}
   </div>
-  <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
+    <div class="m-6">
 
     <label class="label" for="end_date">end date</label>
     <input class="input variant-form-material"
       type="date"
       name="end_date"
       aria-invalid={$errors.end_date ? 'true' : undefined}
-      bind:value={$form.end_date}
+      bind:value={$formData.end_date}
       {...$constraints.end_date} />
     {#if $errors.end_date}<span class="invalid">{$errors.end_date}</span>{/if}
   </div>
-</div>
 <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl">
-    
-<button class="btn">Submit</button></div>
+  <div class="m-6">
+    <button type="submit" class="btn variant-filled-primary w-full"
+    >{#if $delayed}<ConicGradient stops={conicStops} spin width="w-6" />{:else}{"submit"}{/if}</button
+    >
+  </div>
+<!--<button class="btn">Submit</button></div>-->
   </form>
-  </div>
-  </div>
   {/if}
 
-  
+{/if}

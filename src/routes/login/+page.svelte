@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { PageData, ActionData } from './$types';
+    import type { PageData, ActionData } from './$types'
     import { superForm } from 'sveltekit-superforms/client';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
     import { ConicGradient } from '@skeletonlabs/skeleton';
@@ -16,10 +16,14 @@
 
   $: if (form) {
     $username = form.username;
-    localStorage.setItem('username', form.username);
-    console.log(localStorage.getItem('username'))
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('username', form.username);
+      console.log(localStorage.getItem('username'))
+    }
   }
 </script>
+
+
 {#if form}
   <div>Welcome back, {$username}!</div>
   <!-- <SuperDebug data={$form} /> -->
@@ -32,8 +36,8 @@
         <label class="label" for="Email">Email</label>
         <input
             class="input "
-            type="email" 
-            name="Email" 
+            type="email"
+            name="Email"
             aria-invalid={$errors.Email ? 'true' : undefined}
             bind:value={$formData.Email}
             {...$constraints.Email} />
@@ -42,10 +46,10 @@
 
       <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[70%] h-[20%]">
         <label class="label" for="Password">Password</label>
-        <input 
+        <input
             class="input"
-            type="password" 
-            name="Password" 
+            type="password"
+            name="Password"
             aria-invalid={$errors.Password ? 'true' : undefined}
             bind:value={$formData.Password}
             {...$constraints.Password} />
@@ -57,7 +61,7 @@
         <button class="flex  btn variant-filled-warning shadow-2xl ">Submit</button>
       </div>
     </form>
-  </div>  
+  </div>
 </div>
 <!-- </div> -->
 {/if}
