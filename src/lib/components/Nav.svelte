@@ -42,24 +42,29 @@
 					<span></span><span class="flex-auto">{'modes'}</span></a
 				>
 			</li>
+<!--			<li>-->
+<!--				<form-->
+<!--					use:enhance-->
+<!--					action="/logout"-->
+<!--					method="post"-->
+<!--					on:click={drawerClose}-->
+<!--					on:keydown={drawerClose}-->
+<!--				>-->
+<!--					<button type="submit" class="btn"-->
+<!--						><span></span><span>{'logout'}</span></button-->
+<!--					>-->
+<!--				</form>-->
+<!--			</li>-->
 			<li>
-				<form
-					use:enhance
-					action="/logout"
-					method="post"
-					on:click={drawerClose}
-					on:keydown={drawerClose}
-				>
-					<button type="submit" class="btn"
-						><span></span><span>{'logout'}</span></button
-					>
-				</form>
+			<a href="/logout" on:click={drawerClose}>
+				<span></span><span class="flex-auto">{'logout'}</span></a
+			>
 			</li>
 		{/if}
 		{#if !user}
 			<li>
 				<a href="/login" on:click={drawerClose}>
-					<span></span><span class="flex-auto">{'signin'}</span></a
+					<span></span><span class="flex-auto">{'login'}</span></a
 				>
 			</li>
 			<li>

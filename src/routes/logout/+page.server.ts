@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { GET, USER_ENDPOINTS } from '../../lib/constants';
+import { GET, USER_ENDPOINTS } from '$lib/constants';
 
 // export const actions = {
 //     default: async ({ event }) => {
@@ -27,8 +27,8 @@ export async function load({ cookies }) {
         }
         const response = await GET(USER_ENDPOINTS.LOGOUT)
         const res = await response
-        console.log(res)
+        // console.log(res)
         cookies.delete('jwt')
-        console.log(cookies.get('jwt'))
-        throw redirect(302, '/')
+        // console.log(cookies.get('jwt'))
+        // throw redirect(302, '/')
     }

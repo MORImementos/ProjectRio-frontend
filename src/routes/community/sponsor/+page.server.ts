@@ -64,7 +64,7 @@ export const actions = {
           
         const res = await response.json();
         const sponsor = res.sponsor
-        // console.log(sponsor)
+        console.log(sponsor)
         // if community creation successful
         if (response.status === 200) {
             // Handle the response as needed

@@ -18,7 +18,7 @@ type userLogin = z.infer<typeof userLogin>
 // on page load, check for jwt and redirect if jwt present
 export const load = async (event) => {
 	const jwt = event.cookies.get('jwt')
-	if (jwt) throw redirect(302, '/');
+	// if (jwt) throw redirect(302, '/');
 	
     const form = await superValidate(event, userLogin);
 	return {
@@ -79,7 +79,12 @@ export const actions = {
             }
 
             if (res.username) {
-                username.set(res.username) 
+                username.set(res.username)
+            }
+            return {
+                form: form,
+                msg: res.msg,
+                username: res.username
             }
         }
         /* Yep, return { form } here too (apparently superforms really wants you to return forms)

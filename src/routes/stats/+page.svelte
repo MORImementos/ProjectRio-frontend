@@ -3,7 +3,9 @@
     import { titleCase } from '$lib/utils';
   </script>
   
-  {#if data}
+  {#if !data.data.Stats}
+    <div class="placeholder"></div>
+  {:else}
     <section class="grid grid-cols-2 md:grid-cols-2 gap-4 h-screen">
       {#each Object.entries(data.data.Stats) as [key, value]}
         <div class="table-container">

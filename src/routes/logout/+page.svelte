@@ -1,12 +1,4 @@
 <script lang="ts">
-    import { enhance } from "$app/forms";
-
+    localStorage.removeItem('username')
 </script>
-
-<!-- <form 
-    use:enhance   
-    method="POST">
-<button>
-LOGOUT
-</button>
-</form> -->
+    <p>You have been successfully logged out.</p>

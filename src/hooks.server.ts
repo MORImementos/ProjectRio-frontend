@@ -6,6 +6,8 @@ import { redirect } from '@sveltejs/kit';
 /* handle function is used to intercept all requests, so it will be used to alter and return the response objects from those. I think the primary benefit of it for us will be redirecting, particularly based on things like patrons reaching their community limits, etc. */ 
 export const handle = (async ({ event, resolve }) => {
     const response = await resolve(event)
+    response.headers.set('Cache-Control', 'public, max-age=3600');
+
     return response
 }) satisfies Handle
 
@@ -20,15 +22,16 @@ export const handleFetch = (async ({ event, request, fetch }) => {
         // if login, redirect if JWT exists
         if (event.url.pathname.startsWith('/login')) {
             if (jwt) {
-                throw redirect(303, '/')
+                // throw redirect(303, '/')
             }
             return fetch(request)
         } else {
             // if not login, set Authorization header
-            if (jwt) {
-                request.headers.set('Authorization', `Bearer ${jwt}`)
-                // console.log(request.headers)
-                // console.log('test')
+            if (!event.url.pathname.startsWith('/logout')) {
+                if (jwt) {
+                    request.headers.set('Authorization', `Bearer ${jwt}`)
+
+                }
             }
         }
     }

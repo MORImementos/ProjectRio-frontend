@@ -16,6 +16,7 @@
 		dataTableHandler,
 		drawerStore
 	} from '@skeletonlabs/skeleton';
+	import { Menu } from 'lucide-svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import { APP_NAME } from '$lib/config/constants';
 	// import Footer from '$lib/components/Footer.svelte';
@@ -28,21 +29,23 @@
 	function drawerOpen(): void {
 		drawerStore.open();
 	}
-	//console.log(JSON.stringify(data));
 	// let username = '';
-	onMount(() => {
-		// if (data?.user?.firstName && data?.user?.lastName) {
-			// username = convertNameTousername(data?.user?.firstName, data?.user?.lastName);
-		// }
-	});
-	//$: username = convertNameTousername(data.user.firstName, data.user.lastName);
-	$: username
+	// onMount(() => {
+	//
+	// });
+	$: if (!$username) {
+		if (localStorage.getItem('username')) {
+			$username = localStorage.getItem('username');
+			console.log($username);
+		}
+	}
+
 </script>
 
 <Toast position="tr" />
 <Modal />
 <Drawer>
-	<Nav user={username} />
+	<Nav user={$username} />
 </Drawer>
 
 <AppShell slotSidebarLeft="w-0 md:w-52 bg-surface-500/10">
@@ -51,20 +54,24 @@
 			<svelte:fragment slot="lead">
 				<button class="md:hidden btn btn-sm mr-4" aria-label="Menu Button" on:click={drawerOpen}>
 					<span>
+						<Menu />
 					</span>
 				</button>
 				<strong class="text-xl uppercase">{APP_NAME}</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+				{#if $username}
+					<Avatar {$username} width="w-10" background="bg-primary-500" />
+				{/if}
 				<!-- {#if data?.user}<Avatar {username} width="w-10" background="bg-primary-500" />{/if} -->
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
-		<Nav user={username} />
+		<Nav user={$username} />
 	</svelte:fragment>
 	<!-- Main Content -->
-	<div class="container lg:p-10 mx-auto text-token">
+	<div class="container lg:p-10 mx-auto">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter"></svelte:fragment>
