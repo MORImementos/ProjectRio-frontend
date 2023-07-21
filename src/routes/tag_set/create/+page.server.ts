@@ -36,6 +36,10 @@ export const actions = {
     default: async ({ request, fetch }) => {
         const form = await superValidate(request, tagsetCreate);
 
+        if (!form.data.tag_set_id > 0) {
+            delete form.data.tag_set_id
+            console.log(form.data)
+        }
         // Convenient validation check:
         if (!form.valid) {
             // Again, always return { form } and things will just work. (superforms comment)

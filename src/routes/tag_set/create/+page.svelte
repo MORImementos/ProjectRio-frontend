@@ -20,14 +20,9 @@
     ];
     let tags = [];
     let tagset = [];
-    // onMount(async () => {
-    //   const response = await GET(UNCATEGORIZED_ENDPOINTS.TAG_LIST);
-    //   const res = await response;
-    //   tags = res.Tags;
-    //   console.log(tags);
-    //
-    //   await getAllTagSets()
-    // });
+    let tagNames = [];
+    let tagIds = [];
+
     onMount(async () => {
       try {
         const [response, tagSetsResponse] = await Promise.all([
@@ -39,6 +34,11 @@
         const tagSets = await tagSetsResponse;
 
         tags = res.Tags;
+        tags.forEach(i => {
+          tagNames.push(i.name)
+          tagIds.push(i.id)
+        })
+        console.log(tagNames, tagIds)
         console.log(tags);
 
         // Use tagSets data here
@@ -50,6 +50,16 @@
       }
     });
 
+
+
+    let showSelect = false;
+
+    function toggleSelect() {
+        showSelect = !showSelect;
+        if (!showSelect) {
+            $formData.tag_set_id = undefined; // Clear the selection when hiding the select element
+        }
+    }
   </script>
     <SuperDebug data={$formData} />
 {#if form}
@@ -125,52 +135,61 @@
     <div class="m-6">
       <div class="tags">
       <label class="label" for="tags">Tags</label>
-<!--      <select class="select" multiple name="tags" bind:value={$formData.tags}>-->
-<!--        {#each tags as tag}-->
+<!--          <select class="select" multiple name="tags" bind:value={$formData.tags} >-->
+          <select class="select" multiple name="tags" bind:value={$formData.tags}>
+
+          {#each tags as tag, index}
 <!--          <span class="chip variant-soft hover:variant-filled">-->
 <!--            <span>(icon)</span>-->
 <!--            <span>Action</span>-->
 <!--          </span>-->
-<!--          <option value={tag.name}>{tag.name}</option>-->
-<!--        {/each}-->
+          <option value={tag.id}>{tag.name}</option>
+        {/each}
 
-<!--      </select>-->
-        <select class="select" multiple>
-          {#each tags as tag}
-          <span class="chip variant-soft hover:variant-filled">
-            <span>(icon)</span>
-            <span>Action</span>
-          </span>
-            <option value={tag.name}>{tag.name}</option>
-          {/each}
+      </select>
+<!--        <select class="select" multiple>-->
+<!--          {#each tags as tag}-->
+<!--          <span class="chip variant-soft hover:variant-filled">-->
+<!--            <span>(icon)</span>-->
+<!--            <span>Action</span>-->
+<!--          </span>-->
+<!--            <option value={tag.name}>{tag.name}</option>-->
+<!--          {/each}-->
 
-        </select>
+<!--        </select>-->
       {#if $errors.tags}<span class="invalid">{$errors.tags}</span>{/if}
       </div>
-      <div class="chips">
-        <InputChip name="tags" placeholder="Tags..." />
+<!--      <div class="chips">-->
+<!--        <InputChip name="tags" bind:value={tags} placeholder="Tags..." />-->
 
-      </div>
+<!--      </div>-->
     </div>
-    <div class="m-6">
-      <div class="tag_set_id">
-        <label class="label" for="tag_set_id">tagset id</label>
-        <select class="select" multiple name="tag_set_id" bind:value={$formData.tag_set_id}>
-          {#each tagset as t}
-          <span class="chip variant-soft hover:variant-filled">
-            <span>(icon)</span>
-            <span>Action</span>
-          </span>
-            <option value={t.name}>{t.name}</option>
-          {/each}
+<!--    <div class="m-6">-->
+<!--      <div class="tag_set_id">-->
+<!--          <label>-->
+<!--              <input type="checkbox" on:change={toggleSelect} />-->
+<!--              Show Tagsets-->
+<!--          </label>-->
+<!--        <label class="label" for="tag_set_id">tagset id</label>-->
+<!--          {#if showSelect}-->
 
-        </select>
-        {#if $errors.tag_set_id}<span class="invalid">{$errors.tag_set_id}</span>{/if}
-      </div>
-      <div class="chips">
+<!--          <select class="select" name="tag_set_id" bind:value={$formData.tag_set_id}>-->
+<!--          {#each tagset as t}-->
+<!--          <span class="chip variant-soft hover:variant-filled">-->
+<!--            <span>(icon)</span>-->
+<!--            <span>Action</span>-->
+<!--          </span>-->
+<!--            <option value={t.id}>{t.name}</option>-->
+<!--          {/each}-->
 
-      </div>
-    </div>
+<!--        </select>-->
+<!--              {/if}-->
+<!--        {#if $errors.tag_set_id}<span class="invalid">{$errors.tag_set_id}</span>{/if}-->
+<!--      </div>-->
+<!--      <div class="chips">-->
+
+<!--      </div>-->
+<!--    </div>-->
     <div class="m-6">
     <div class="m-6">
     <label class="label" for="start_date">start date</label>

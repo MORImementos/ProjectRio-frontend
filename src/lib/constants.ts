@@ -57,7 +57,7 @@ export enum UNCATEGORIZED_ENDPOINTS {
     GET_TAG_SET = '/tag_set/ladder/',
     TAGSET_LIST = '/tag_set/list',
     TAG_LIST = '/tag/list',
-    CREATE_TAG_SET = '/tag_set/create/',
+    CREATE_TAG_SET = '/tag_set/create',
 }
 
 export const GET = async (endpoint: string, param='') => {
