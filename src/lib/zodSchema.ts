@@ -84,10 +84,10 @@ export const Tagset = z.object({
     tag_set_id: z
         .number(),
     start_date: z
-        .number()
+        .date()
         .transform((val) => new Date(val), (val) => val.getTime().toString()),
     end_date: z
-        .number()
+        .date()
         .transform((val) => new Date(val), (val) => val.getTime().toString()),
 
 })

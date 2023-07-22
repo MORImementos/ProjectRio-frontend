@@ -38,15 +38,22 @@ export const actions = {
 
         if (!form.data.tag_set_id > 0) {
             delete form.data.tag_set_id
-            console.log(form.data)
+            // console.log(form.data)
         }
+
+        // console.log(form.data)
+        form.data.start_date = Math.floor(form.data.start_date.getTime() / 1000)
+        form.data.end_date = Math.floor(form.data.end_date.getTime() / 1000)
+
+
+        // console.log(form.data)
         // Convenient validation check:
         if (!form.valid) {
             // Again, always return { form } and things will just work. (superforms comment)
             return fail(400, { form });
         }
         
-        console.log(form.data)
+        // console.log(form.data)
         // fetch request
         console.log(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET)
         const response = await fetch(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET, {
@@ -59,21 +66,22 @@ export const actions = {
         // if community creation unsuccessful
         if (response.status !== 200) {
         {
+            // console.log(response.body)
             // This is all just a way to parse the HTML error received. I'm still not certain if I intend to do anything with it or not yet since a generic error might be all that's needed.
-            const reader = response.body?.getReader();
-            const reading = true;
-            const errorObj = {};
+        //     const reader = response.body?.getReader();
+        //     const reading = true;
+        //     const errorObj = {};
+        //
+        //     while (reading) {
+        //         const { done, value } = (reader ?? {}).read(); // Use nullish coalescing operator to handle undefined reader
+        //     if (done) break;
+        //     const val = new TextDecoder().decode(value);
+        //     errorObj[val] = val;
+        // }
 
-            while (reading) {
-                const { done, value } = (reader ?? {}).read(); // Use nullish coalescing operator to handle undefined reader
-            if (done) break;
-            const val = new TextDecoder().decode(value);
-            errorObj[val] = val;
-        }
-
-  // Return error
-  return fail(response.status, { form });
-            }
+          // Return error
+          return fail(response.status, { form });
+                    }
         }
         const res = await response.json();
 
@@ -88,8 +96,6 @@ export const actions = {
         TODO: Add any additional data you want to return */
         return {
             form: form,
-            msg: res.msg,
-            username: res.username
         }
     }
 } satisfies Actions;
