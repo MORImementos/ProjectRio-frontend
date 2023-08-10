@@ -6,7 +6,7 @@
     let user = '';
     import {username} from "$lib/stores/user";
     async function handleClick() {
-        const response = await GET(USER_ENDPOINTS.USER_COMMUNITY, `?username=${username}`)
+        const response = await GET(USER_ENDPOINTS.USER_COMMUNITY, `?username=${$username}`)
         const res = await response;
         console.log(res)
         data = res.communities;

@@ -78,14 +78,19 @@
     getLadderPeak();
 
   </script>
+<!--<button class="btn variant-ghost-error">-->
+<!--    <a href="/modes" class="decoration-transparent"><button class="game-mode">Return to Games List</button></a>-->
+<!--</button>-->
+<div class="flex-auto">
 
-  <a href="/modes"><button class="game-mode">Return to Games List</button></a>
-
+    <a href={`/modes/` + $page.params.gamemode + `/ladder`} class="decoration-transparent"><input type="checkbox" class="checkbox" id="ladder" name="ladder">
+        <label for="ladder">View ladder for this Game Mode.</label></a>
+</div>
   
   <h1>{titleCase($page.params.gamemode)} - ELO Peaks</h1>
   {#if data}
   <section class="table-container">
-    <table class="table" use:sortableTableAction>
+    <table class="table table-hover table-interactive" use:sortableTableAction>
       <thead>
       <tr class="table-cell-fit">
         <th>#</th>
@@ -101,7 +106,7 @@
                 <tr class="table-cell-fit">
                     <td>{i + 1}</td>
                     <td>{stats.score}</td>
-                    <td class="player-link"><a class="player" href={`/modes/player/${player}`}>{player}</a></td>
+                    <td class="player-link"><a class="player decoration-transparent" href={`/modes/player/${player}`}>{player}</a></td>
                     <td>{stats.date}</td>
                 </tr>
             {/if}
@@ -112,3 +117,9 @@
     </table>
   </section>
   {/if}
+
+<style>
+td a, a {
+    color: rgba(var(--text-neutral-500) / 1) !important;
+}
+</style>

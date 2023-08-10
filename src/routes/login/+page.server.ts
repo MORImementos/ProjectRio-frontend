@@ -17,9 +17,9 @@ type userLogin = z.infer<typeof userLogin>
 
 // on page load, check for jwt and redirect if jwt present
 export const load = async (event) => {
-	const jwt = event.cookies.get('jwt')
-	if (jwt) throw redirect(302, '/');
-	
+	// const jwt = event.cookies.get('jwt')
+	// if (jwt) throw redirect(302, '/');
+	//
     const form = await superValidate(event, userLogin);
 	return {
 		form
