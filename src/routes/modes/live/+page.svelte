@@ -9,6 +9,7 @@
     import { sortableTableAction } from 'svelte-legos';
     import { BACKEND, STAT_ENDPOINTS } from '$lib/constants'
 
+    let gamesToDisplay = false;
     // Access the tagsets data in your component
     let tagsetsData: any[] = []
     $: {
@@ -29,11 +30,14 @@
     }
     
 
-    function withinLastHour(timestamp: Number) {
+    function withinLastHour(timestamp: number) {
         const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
-        const oneHourAgo: Number = currentTime - (60 * 60); // Subtract one hour in seconds
-
-        return timestamp >= oneHourAgo;
+        const oneHourAgo: number = currentTime - (60 * 60); // Subtract one hour in seconds
+        if (timestamp >= oneHourAgo) {
+          gamesToDisplay = true;
+          return true;
+        }
+        return false;
     }
 
     
@@ -44,6 +48,7 @@
   <!-- <h1 style="display:flex;justify-content:center;align-items:center;">  <img src={slice} alt=""></h1> -->
 </div>
 {#if data.live}
+  {#if gamesToDisplay}
 <div class="flex justify-center items-center mx-auto transition-[width] duration-200 w-full ">
   <div class="table-container text-token">
     <h2 class="h2">Live Games</h2>
@@ -62,7 +67,6 @@
       <tbody>
       {#each data.live as live}
       <!-- filter by being a game mode with slice in name -->
-        <!-- {#if String(tagsetsData.find(tagset => tagset.id === live.tag_set)?.name).includes("SLICE")} -->
           {#if withinLastHour(live.start_time)}
             <tr>
               <td class="player-link">
@@ -164,4 +168,5 @@
   </div>
 {:else}
   <h1 class="h1">No games are being played right now. The page will refresh automatically and update when there are active games.</h1>
-{/if}
+    {/if}
+  {/if}

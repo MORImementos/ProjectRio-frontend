@@ -76,7 +76,7 @@
                         <tr>
                             <!-- <td>{tagset.comm_id}</td> -->
                             <!-- <td>{tagset.id}</td> -->
-                            <a class="link-text" href="{tagset.name}/ladder">
+                            <a class="link-text decoration-transparent" href="{tagset.name}/ladder">
                                 <td class="link-cell">{tagset.name}</td>
                             </a>
                             <td>{tagset.comm_type}</td>
@@ -104,3 +104,9 @@
 
 
 </div>
+
+<style>
+    td a, a {
+        color: rgba(var(--text-neutral-500) / 1) !important;
+    }
+</style>
