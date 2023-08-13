@@ -12,6 +12,8 @@
     import type {ConicStop} from '@skeletonlabs/skeleton';
     import {getAllTagSets} from "$lib/helpers/tagNames";
     import {tagsets} from "$lib/stores/tagsets";
+    import {getUserCommunities} from "$lib/helpers/userCommunities";
+    import {username} from "$lib/stores/user";
     // Client API:
     const {form: formData, errors, constraints, enhance, delayed} = superForm(data.form);
     const conicStops: ConicStop[] = [
@@ -25,13 +27,15 @@
 
     onMount(async () => {
         try {
-            const [response, tagSetsResponse] = await Promise.all([
+            const [response, tagSetsResponse, commResponse] = await Promise.all([
                 GET(UNCATEGORIZED_ENDPOINTS.TAG_LIST),
-                getAllTagSets()
+                getAllTagSets(),
+                getUserCommunities($username)
             ]);
 
             const res = await response;
             const tagSets = await tagSetsResponse;
+            const userComm = await commResponse;
 
             tags = res.Tags;
             tags.forEach(i => {
