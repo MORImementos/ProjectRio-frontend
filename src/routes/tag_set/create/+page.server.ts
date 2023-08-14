@@ -37,19 +37,15 @@ export const load = async ({ event, cookies }) => {
 export const actions = {
     default: async ({ request, fetch }) => {
         const form = await superValidate(request, tagsetCreate);
-        if (!(form.data.tag_set_id)) {
-            console.log(form.data)
+
+        if ((!(form.data.tag_set_id)) || form.data.tag_set_id > 0) {
+            delete form.data.tag_set_id
         }
-        // if (!(form.data.tag_set_id > 0)) {
-        //     delete form.data.tag_set_id
-        //     // console.log(form.data)
-        // }
-
-
 
         // console.log(form.data)
         form.data.start_date = Math.floor(form.data.start_date.getTime() / 1000)
         form.data.end_date = Math.floor(form.data.end_date.getTime() / 1000)
+
 
 
         // console.log(form.data)
@@ -59,16 +55,14 @@ export const actions = {
             return fail(400, { form });
         }
         
-        // console.log(form.data)
         // fetch request
-        console.log(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET)
         const response = await fetch(BACKEND + UNCATEGORIZED_ENDPOINTS.CREATE_TAG_SET, {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
             body: JSON.stringify(form.data),
         })
         
-        console.log(response.status)
+        // console.log(response.status)
         // if community creation unsuccessful
         if (response.status !== 200) {
         {
@@ -94,7 +88,8 @@ export const actions = {
         // if community creation successful
         if (response.status === 200) {
             // Handle the response as needed
-            console.log(res)
+            console.log(form)
+            return { success: true, form: form,}
         }
 
         /* Yep, return { form } here too (apparently superforms really wants you to return forms)

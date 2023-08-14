@@ -16,6 +16,8 @@ const userLogin = User.pick({
 type userLogin = z.infer<typeof userLogin>
 
 // on page load, check for jwt and redirect if jwt present
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const load = async (event) => {
 	// const jwt = event.cookies.get('jwt')
 	// if (jwt) throw redirect(302, '/');

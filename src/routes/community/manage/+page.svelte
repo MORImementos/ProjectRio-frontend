@@ -48,9 +48,5 @@
     </div>
 </div>
 
-<style>
-    .invalid {
-        color: red;
-    }
-</style>
+
 

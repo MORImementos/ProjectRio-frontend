@@ -16,10 +16,10 @@ export const handle = (async ({ event, resolve }) => {
 export const handleFetch = (async ({ event, request, fetch }) => {
     // get JWT
     const jwt = event.cookies.get('jwt')
-    console.log(jwt)
+    // console.log(jwt)
     // if request is to API
     if (request.url.startsWith(BACKEND)) {
-        console.log(event.url.pathname)
+        // console.log(event.url.pathname)
         // if login, redirect if JWT exists
         if (event.url.pathname.startsWith('/login')) {
             if (jwt) {
@@ -32,7 +32,7 @@ export const handleFetch = (async ({ event, request, fetch }) => {
             if (!event.url.pathname.startsWith('/logout')) {
                 if (jwt) {
                     request.headers.set('Authorization', `Bearer ${jwt}`)
-                    console.log(request.headers)
+                    // console.log(request.headers)
 
                 }
             }

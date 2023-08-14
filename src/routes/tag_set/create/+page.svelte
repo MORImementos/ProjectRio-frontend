@@ -72,7 +72,9 @@
 </script>
 <SuperDebug data={$formData}/>
 {#if form}
-    <p>{form.name} created.</p>
+    <p>Community created.</p>
+    <!--{console.log(form)}-->
+<!--    <p>{form.data.name} created.</p>-->
 {:else}
     {#if tags}
         <form method="POST" class="card flex-col" use:enhance>
