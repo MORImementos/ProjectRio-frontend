@@ -18,7 +18,7 @@
 	} from '@skeletonlabs/skeleton';
 	import { browser } from '$app/environment';
 
-	import { Menu } from 'lucide-svelte';
+	import {MenuIcon} from "lucide-svelte";
 	import Nav from '$lib/components/Nav.svelte';
 	import { APP_NAME } from '$lib/config/constants';
 	// import Footer from '$lib/components/Footer.svelte';
@@ -53,7 +53,7 @@
 			<svelte:fragment slot="lead">
 				<button class="md:hidden btn btn-sm mr-4" aria-label="Menu Button" on:click={drawerOpen}>
 					<span>
-						<Menu />
+						<MenuIcon />
 					</span>
 				</button>
 				<strong class="text-xl uppercase">{APP_NAME}</strong>

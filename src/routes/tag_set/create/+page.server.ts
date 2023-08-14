@@ -21,6 +21,8 @@ const tagsetCreate = Tagset.pick({
 type tagsetCreate = z.infer<typeof tagsetCreate>
 
 // on page load, check for jwt and redirect if jwt present
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const load = async ({ event, cookies }) => {
     const jwt = cookies.get('jwt')
     if (!jwt) throw redirect(302, '/login');
@@ -35,11 +37,15 @@ export const load = async ({ event, cookies }) => {
 export const actions = {
     default: async ({ request, fetch }) => {
         const form = await superValidate(request, tagsetCreate);
-
-        if (!form.data.tag_set_id > 0) {
-            delete form.data.tag_set_id
-            // console.log(form.data)
+        if (!(form.data.tag_set_id)) {
+            console.log(form.data)
         }
+        // if (!(form.data.tag_set_id > 0)) {
+        //     delete form.data.tag_set_id
+        //     // console.log(form.data)
+        // }
+
+
 
         // console.log(form.data)
         form.data.start_date = Math.floor(form.data.start_date.getTime() / 1000)

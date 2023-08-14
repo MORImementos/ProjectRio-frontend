@@ -14,8 +14,9 @@
     import {tagsets} from "$lib/stores/tagsets";
     import {getUserCommunities} from "$lib/helpers/userCommunities";
     import {username} from "$lib/stores/user";
+
     // Client API:
-    const {form: formData, errors, constraints, enhance, delayed} = superForm(data.form);
+    const {form: formData, errors, constraints, enhance, delayed} = superForm(data?.form);
     const conicStops: ConicStop[] = [
         {color: 'transparent', start: 0, end: 25},
         {color: 'rgb(var(--color-primary-900))', start: 75, end: 100}
@@ -24,7 +25,7 @@
     let tagset = [];
     let tagNames = [];
     let tagIds = [];
-
+    let userCommunities;
     onMount(async () => {
         try {
             const [response, tagSetsResponse, commResponse] = await Promise.all([
@@ -44,7 +45,8 @@
             })
             console.log(tagNames, tagIds)
             console.log(tags);
-
+            userCommunities = userComm
+            console.log(userCommunities)
             // Use tagSets data here
             tagset = $tagsets
             // console.log(tagSets);
@@ -128,19 +130,34 @@
                 </select>
                 {#if $errors.type}<span class="invalid">{$errors.type}</span>{/if}
             </div>
-            <div class="m-6">
+<!--            <div class="m-6">-->
 
-                <label class="label" for="community_name">community name</label>
-                <input class="input text-token"
-                       type="text"
-                       name="community_name"
+<!--                <label class="label" for="community_name">community name</label>-->
+<!--                <input class="input text-token"-->
+<!--                       type="text"-->
+<!--                       name="community_name"-->
 
-                       aria-invalid={$errors.community_name ? 'true' : undefined}
-                       bind:value={$formData.community_name}
-                       {...$constraints.community_name}/>
-                {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}
-            </div>
-
+<!--                       aria-invalid={$errors.community_name ? 'true' : undefined}-->
+<!--                       bind:value={$formData.community_name}-->
+<!--                       {...$constraints.community_name}/>-->
+<!--                {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}-->
+<!--            </div>-->
+            {#if userCommunities}
+                <div class="m-6">
+                    <label class="label" for="community_name">Community Name</label>
+                    <select
+                            class="input text-token"
+                            name="community_name"
+                            aria-invalid={$errors.community_name ? 'true' : undefined}
+                            bind:value={$formData.community_name}
+                            {...$constraints.community_name}>
+                        {#each Object.values(userCommunities) as comm}
+                            <option value={comm.name}>{comm.name}</option>
+                        {/each}
+                    </select>
+                    {#if $errors.community_name}<span class="invalid">{$errors.community_name}</span>{/if}
+                </div>
+            {/if}
             <div class="m-6">
                 <div class="tags">
                     <label class="label" for="tags">Tags</label>
