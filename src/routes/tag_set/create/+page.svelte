@@ -66,12 +66,9 @@
         }
     }
 
-    // export function unixTimeFromDate(date) {
-    //     return Math.floor(new Date (date).getTime() / 1000);
-    // }
 </script>
 <SuperDebug data={$formData}/>
-{#if form}
+{#if form?.success}
     <p>Community created.</p>
     <!--{console.log(form)}-->
 <!--    <p>{form.data.name} created.</p>-->

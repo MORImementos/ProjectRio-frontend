@@ -73,7 +73,7 @@ export const Tagset = z.object({
         .min(1, { message: 'Community description is too short'})
         .trim(),
     type: z
-        .enum(["Tournament", "Season", "Ladder"], { required_error: 'Enter a valid type' }),
+        .enum(["Tournament", "Season", "League"], { required_error: 'Enter a valid type' }),
     community_name: z
         .string({ required_error: 'Enter a valid community name' })
         .max(COMMUNITY_CHARACTER_LIMIT, { message: 'Community name is too long' })

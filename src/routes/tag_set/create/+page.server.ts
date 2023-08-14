@@ -42,13 +42,17 @@ export const actions = {
             delete form.data.tag_set_id
         }
 
-        // console.log(form.data)
-        form.data.start_date = Math.floor(form.data.start_date.getTime() / 1000)
-        form.data.end_date = Math.floor(form.data.end_date.getTime() / 1000)
+        // const startDate = new Date(form.data.start_date + "T00:00:00Z"); // Ensure UTC time zone
+        // let startUnix = Math.floor(startDate.getTime() / 1000);
+        // const endDate = new Date(form.data.end_date + "T00:00:00Z"); // Ensure UTC time zone
+        // let endUnix = Math.floor(endDate.getTime() / 1000);
+        //
+        // form.data.start_date = startUnix;
+        // form.data.end_date = endUnix;
 
 
 
-        // console.log(form.data)
+        console.log(form.data)
         // Convenient validation check:
         if (!form.valid) {
             // Again, always return { form } and things will just work. (superforms comment)
