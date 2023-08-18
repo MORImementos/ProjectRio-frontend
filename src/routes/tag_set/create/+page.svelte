@@ -4,7 +4,7 @@
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
     import {UNCATEGORIZED_ENDPOINTS, GET} from "$lib/constants";
     import {AlertTriangle} from 'lucide-svelte';
-    import {InputChip} from '@skeletonlabs/skeleton'
+    import {InputChip, ListBox, ListBoxItem} from '@skeletonlabs/skeleton'
 
     export let data: PageData;
     export let form;
@@ -69,6 +69,9 @@
 </script>
 <SuperDebug data={$formData}/>
 {#if form?.success}
+    {#each Object.entries(form.data) as [k, v]}
+        <p>{k}: {v}</p>
+    {/each}
     <p>Community created.</p>
     <!--{console.log(form)}-->
 <!--    <p>{form.data.name} created.</p>-->
@@ -89,7 +92,7 @@
 
             <div class="m-6">
 
-                <label class="label" for="name">Name</label>
+                <label class="label" for="name">Game Mode Name</label>
                 <input
                         class="input text-token"
                         type="text"
@@ -107,7 +110,7 @@
                         class="textarea text-token"
                         row="4"
                         name="desc"
-                        placeholder="Enter description of this game mode."
+                        placeholder="Enter a brief description of this game mode."
                         aria-invalid={$errors.desc ? 'true' : undefined}
                         bind:value={$formData.desc}
                         {...$constraints.desc}></textarea>
@@ -161,17 +164,40 @@
                 <div class="tags">
                     <label class="label" for="tags">Tags</label>
                     <!--          <select class="select" multiple name="tags" bind:value={$formData.tags} >-->
-                    <select class="select" multiple name="tags" bind:value={$formData.tags}>
+<!--                    <select class="select" multiple name="tags" bind:value={$formData.tags}>-->
 
-                        {#each tags as tag, index}
-                            <!--          <span class="chip variant-soft hover:variant-filled">-->
-                            <!--            <span>(icon)</span>-->
-                            <!--            <span>Action</span>-->
-                            <!--          </span>-->
-                            <option value={tag.id}>{tag.name}</option>
-                        {/each}
+<!--                        {#each tags as tag, index}-->
 
-                    </select>
+<!--                            &lt;!&ndash;          <span class="chip variant-soft hover:variant-filled">&ndash;&gt;-->
+<!--                            &lt;!&ndash;            <span>(icon)</span>&ndash;&gt;-->
+<!--                            &lt;!&ndash;            <span>Action</span>&ndash;&gt;-->
+<!--                            &lt;!&ndash;          </span>&ndash;&gt;-->
+<!--                            <option value={tag.id}>{tag.name}</option>-->
+<!--                        {/each}-->
+<!--                    </select>-->
+<!--                        <InputChip bind:value={$formData.tags} />-->
+                    <div class="flex">
+                                <ListBox multiple class="flex-auto">
+<!--                                    Not Selected-->
+                                    {#each tags as tag, index}
+                                        {#if !($formData.tags.includes(tag.id))}
+
+                                            <ListBoxItem bind:group={$formData.tags} name="medium" value={tag.id}>{tag.name}</ListBoxItem>
+
+                                        {/if}
+                                    {/each}
+                                </ListBox>
+                                <ListBox multiple class="flex-auto">
+<!--                                    Selected-->
+                                    {#each tags as tag, index}
+                                        {#if $formData.tags.includes(tag.id)}
+                                            <ListBoxItem bind:group={$formData.tags} name="medium" value={tag.id}>{tag.name}</ListBoxItem>
+                                        {/if}
+                                    {/each}
+                                </ListBox>
+
+
+                    </div>
                     <!--        <select class="select" multiple>-->
                     <!--          {#each tags as tag}-->
                     <!--          <span class="chip variant-soft hover:variant-filled">-->
@@ -184,6 +210,18 @@
                     <!--        </select>-->
                     {#if $errors.tags}<span class="invalid">{$errors.tags}</span>{/if}
                 </div>
+<!--                <div class="chips">-->
+<!--                    {#each Object.keys($formData.tags) as f}-->
+<!--                        <span-->
+<!--                                class="chip {f.name ? 'variant-filled' : 'variant-soft'}"-->
+<!--                                on:click={() => { f.name; }}-->
+<!--                                on:keypress-->
+<!--                        >-->
+<!--                            {#if f.name}<span>(icon)</span>{/if}-->
+<!--                            <span class="capitalize">{f.name}</span>-->
+<!--	</span>-->
+<!--                    {/each}-->
+<!--                </div>-->
                 <!--      <div class="chips">-->
                 <!--        <InputChip name="tags" bind:value={tags} placeholder="Tags..." />-->
 
@@ -192,14 +230,14 @@
                 <div class="m-6">
                   <div class="tag_set_id">
                       <label>
-                          <input type="checkbox" on:change={toggleSelect} />
-                          Show Tagsets
+                          <input class="checkbox" type="checkbox" on:change={toggleSelect} />
+                          <span>Base your game mode off of a pre-existing one? (This will not affect any game tags already selected).</span>
                       </label>
-                    <label class="label" for="tag_set_id">tagset id</label>
+                    <label class="label" for="tag_set_id">Game Modes</label>
                       {#if showSelect}
 
                       <select class="select" name="tag_set_id" bind:value={$formData.tag_set_id}>
-                          <option value={0}>Select a tagset</option>
+                          <option value={0}>Select a game mode...</option>
 
                           {#each tagset as t}
                       <span class="chip variant-soft hover:variant-filled">
@@ -213,9 +251,7 @@
                           {/if}
                     {#if $errors.tag_set_id}<span class="invalid">{$errors.tag_set_id}</span>{/if}
                   </div>
-                  <div class="chips">
 
-                  </div>
                 </div>
             <div class="m-6">
                 <label class="label" for="start_date">start date</label>

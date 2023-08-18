@@ -85,10 +85,22 @@ export const Tagset = z.object({
         .number(),
     start_date: z
         .date()
-        .transform((val) => new Date(val), (val) => val.getTime().toString()),
+        // .transform((val) => new Date(val), (val) => val.getTime().toString()),
+        .transform((val) => new Date(val), (val) => val.getTime().toLocaleDateString()),
+
+        // .transform(
+        //     (val) => val.getTime(),
+        //     (val) => new Date(val)
+        // ),
     end_date: z
         .date()
-        .transform((val) => new Date(val), (val) => val.getTime().toString()),
+        // .transform((val) => new Date(val), (val) => val.getTime().toString()),
+    .transform((val) => new Date(val), (val) => val.getTime().toLocaleDateString()),
+
+        // .transform(
+        //     (val) => val.getTime(),
+        //     (val) => new Date(val),
+        // ),
 
 })
 

@@ -46,9 +46,9 @@ export const actions = {
         // let startUnix = Math.floor(startDate.getTime() / 1000);
         // const endDate = new Date(form.data.end_date + "T00:00:00Z"); // Ensure UTC time zone
         // let endUnix = Math.floor(endDate.getTime() / 1000);
-        //
-        // form.data.start_date = startUnix;
-        // form.data.end_date = endUnix;
+
+        form.data.start_date = Math.floor(form.data.start_date / 1000) + 14400
+        form.data.end_date = Math.floor(form.data.end_date / 1000) + 14400
 
 
 
