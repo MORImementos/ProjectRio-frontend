@@ -1,26 +1,44 @@
 <script lang="ts">
-    import {getAllUsers} from "$lib/helpers/allUsers";
-    let data;
     import {onMount} from "svelte";
-    import type { TableSource } from '@skeletonlabs/skeleton';
-    onMount(async () => {
-        data = await getAllUsers();
+
+    export let data;
+    import { Table } from '@skeletonlabs/skeleton'
+    import type {PaginationSettings} from "@skeletonlabs/skeleton";
+    import { Paginator } from "@skeletonlabs/skeleton";
+
+    let users;
+    let paginationSettings;
+
+    onMount(async () =>{
+        users = await data.users;
+        console.log(users)
     })
+
+    let header = ['Username']
+
 
 
 
 </script>
-{#if data}
-    <table class="table table-compact">
-        <thead>
-            <tr>Username</tr>
-        </thead>
-        {#each Object.values(data) as user}
+{#if users}
+<!--    <Table source={{ head: header, body: users }} />-->
+    <div class="table-container overflow-y-scroll">
+        <table class="table table-compact">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                </tr>
+            </thead>
             <tbody>
-                <td>{user}</td>
+
+            {#each Object.values(users) as user}
+                <tr>
+                    <td>{user}</td>
+                </tr>
+            {/each}
             </tbody>
-        {/each}
-    </table>
+        </table>
+    </div>
 {:else}
     <div class="placeholder" />
 {/if}
