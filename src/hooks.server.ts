@@ -32,7 +32,7 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
             // if (!event.url.pathname.startsWith('/logout')) {
                 if (jwt) {
                     request.headers.set('Authorization', `Bearer ${jwt}`)
-                    console.log(request.headers)
+                    // console.log(request.headers)
 
                 } else {
                     throw redirect(303, '/login')

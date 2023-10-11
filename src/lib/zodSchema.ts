@@ -57,6 +57,8 @@ export const Community = z.object({
         .max(1000, { message: 'Community description is too long' })
         .min(1, { message: 'Community description is too short'})
         .trim(),
+    id: z
+        .number(),
 })
 
 // name as gamemodes insted?
@@ -148,3 +150,15 @@ export const ChangePassword = z.object({
 })
 
 type ChangePassword = z.infer<typeof ChangePassword>
+
+export const communityInvite = z.object({
+    community_name: z
+        .string({ required_error: 'Enter a valid community name' })
+        .max(COMMUNITY_CHARACTER_LIMIT, { message: 'Community name is too long' })
+        .min(1, { message: 'Community name is too short' })
+        .trim(),
+    invite_list: z
+        .array(z.string()),
+})
+
+type communityInvite = z.infer<typeof communityInvite>

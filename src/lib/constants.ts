@@ -40,7 +40,7 @@ export enum COMMUNITY_ENDPOINTS {
     COMMUNITY_MANAGE = '/community/manage/',
     COMMUNITY_SPONSOR = '/community/sponsor',
     COMMUNITY_KEY = '/community/key/',
-    COMMUNITY_UPDATE = '/community/update/',
+    COMMUNITY_UPDATE = '/community/update',
 }
 
 // TODO: finish this and others that are 'ADMIN' type endpoints
