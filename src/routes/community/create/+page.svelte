@@ -24,7 +24,7 @@
 {:else if form?.failed}
     <p>There was an error creating your game mode. Make sure that you are creating it in a community that meets the requirements and let us know if you continue to have problems.</p>
 {:else}
-      <SuperDebug data={$formData} />
+<!--      <SuperDebug data={$formData} />-->
   <div class="flex items-center justify-center h-screen ">
     <div class="p-4 md:p-10 flex bg-gradient-to-br variant-gradient-primary-secondary w-[80%] h-[80%] rounded-container-token shadow-2xl space-y-10">
   <form method="POST" class="flex card flex-col justify-center items-center mx-auto transition-[width] duration-200 w-[80%] h-full shadow-2xl" use:enhance>
@@ -58,7 +58,7 @@
     {#if $errors.type}<span class="invalid">{$errors.type}</span>{/if}
 </div>
     <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[15%]">
-    <label for="private">private</label>
+    <label for="private">Make your community private?</label>
     <input
       type="checkbox"
       name="private"
@@ -67,9 +67,10 @@
       {...$constraints.private} />
     {#if $errors.private}<span class="invalid">{$errors.private}</span>{/if}
   </div>
+      {#if $formData.private == true}
   <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[15%]">
 
-    <label for="global_link">global link</label>
+    <label for="global_link">Global link? If your community is private, you can invite users to your community using a link with this option.</label>
     <input
       type="checkbox"
       name="global_link"
@@ -78,6 +79,7 @@
       {...$constraints.global_link} />
     {#if $errors.global_link}<span class="invalid">{$errors.global_link}</span>{/if}
 </div>
+          {/if}
 <div class="card flex flex-col p-4 m-2 text-token space-y-4 shadow-2xl w-[80%] h-[20%]">
 
     <label for="desc">description</label>
